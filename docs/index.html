@@ -3,14 +3,13 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>Htet Aung's Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
             background-color: #000000;
-            padding: 0;
             font-family: 'Courier New', Courier, monospace;
 
         }
@@ -37,7 +36,7 @@
             justify-content: center;
             font-weight: bold;
         }
-   
+
         nav a {
             color: #fff;
             text-decoration: none;
@@ -72,6 +71,10 @@
             margin-bottom: 1rem;
         }
 
+        .hero h1:hover {
+            color: #00000063;
+        }
+
         .hero p {
             font-size: 1.5rem;
             font-family: 'Times New Roman', Times, serif;
@@ -95,6 +98,8 @@
             transition: transform 0.3s ease;
         }
 
+    
+
         .photo-frame {
             width: 200px;
             height: 200px;
@@ -108,17 +113,17 @@
         }
 
         .photo-frame img {
-            
+
             object-fit: cover;
             height: 100%;
             width: 100%;
         }
 
-        
+
 
         .project:hover {
             background-color: #000000;
-            transform: translateY(-5px);
+            transform: translateY(-18px);
         }
 
         .project img {
@@ -128,7 +133,7 @@
         }
 
         .project-content {
-            
+
             padding: 2rem;
         }
 
@@ -145,72 +150,76 @@
             margin-bottom: 1rem;
         }
 
-       .achievements{
-           display: flex;
-color: #fff;
-           justify-content: left;
-           align-items: center;
-           margin-top: 1rem;
-       }
-.footer {
-  position: relative;
-  width: 100%;
-  background: #000000;
-  min-height: 100px;
-  padding: 20px 0px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
+        .achievements {
+            display: flex;
+            color: #fff;
+            justify-content: left;
+            align-items: center;
+            margin-top: 1rem;
+        }
 
-.social-icon,
-.menu {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0;
-  flex-wrap: wrap;
-}
+        .footer {
+            position: absolute;
+            width: 100%;
+            background: #000000;
+            min-height: 100px;
+            padding: 20px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-.social-icon__item,
-.menu__item {
-  list-style: none;
-}
+        .social-icon,
+        .menu {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
 
-.social-icon__link {
-  font-size: 2rem;
-  color: #fff;
-  margin: 0 10px;
-  display: inline-block;
-  transition: 0.5s;
-}
-.social-icon__link:hover {
-  transform: translateY(-10px);
-}
+        .social-icon__item,
+        .menu__item {
+            list-style: none;
+        }
 
-.menu__link {
-  font-size: 1.2rem;
-  color: #fff;
-  margin: 0 10px;
-  display: inline-block;
-  transition: 0.5s;
-  text-decoration: none;
-  opacity: 0.75;
-  font-weight: 300;
-}
+        .social-icon__link {
+            font-size: 2rem;
+            color: #fff;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+        }
 
-.menu__link:hover {
-  opacity: 1;
-}
+        .social-icon__link:hover {
+            transform: translateY(-10px);
+        }
 
-.footer p {
-  color: #faf3f3;
-  margin: 15px 0 10px 0;
-  font-size: 1rem;
-  font-weight: 300;
-}
+        .menu__link {
+            font-size: 1.2rem;
+            color: #fff;
+            margin: 0 10px;
+            display: inline-block;
+            transition: 0.5s;
+            text-decoration: none;
+            opacity: 0.75;
+            font-weight: 300;
+        }
+
+        .menu__link:hover {
+            opacity: 1;
+            color: #fff;
+            font-size: x-large;
+        }
+
+        .footer p {
+            color: #faf3f3;
+            margin: 15px 0 10px 0;
+            font-size: 1rem;
+            font-weight: 300;
+        }
 
 
         .hero-button {
@@ -230,59 +239,63 @@ color: #fff;
         }
 
         .hero-button:hover {
-             background-color: #f8f5f5;
+            background-color: #f8f5f5;
             border-radius: 7px;
             padding: 12px 24px 16px;
             color: #080808;
+            font-size: x-large;
+
             transform: translateY(-2px);
         }
 
 
         .project-button {
-display: inline-block;
+            display: inline-block;
             outline: 0;
             border: 0;
             font-family: 'Times New Roman', Times, serif;
             cursor: pointer;
-            
+
             background: #0f0f0f46;
             color: #FFFFFF;
             border-radius: 9px;
- padding: 14px 24px 16px;            
- font-size: 16px;
+            padding: 14px 24px 16px;
+            font-size: 16px;
             font-weight: 700;
             line-height: 1;
-                    
+
             transition: transform 200ms, background 200ms;
         }
-       
-         .social-github{
-display: inline-block;
+
+        .social-github {
+            display: inline-block;
             outline: 0;
             border: 0;
             font-family: 'Times New Roman', Times, serif;
             cursor: pointer;
-            
+
             background: #0f0f0f46;
             color: #FFFFFF;
             border-radius: 9px;
-      padding: 0px 0px;            
- font-size: 16px;
+            padding: 0px 0px;
+            font-size: 16px;
             font-weight: 700;
             line-height: 1;
-                    
+
             transition: transform 200ms, background 200ms;
-         }
+        }
+
         .social-github:hover {
             color: #000000;
-            background-color:rgba(255, 255, 255, 0);
-            transform: translateY(-2px);}
+            background-color: rgba(255, 255, 255, 0);
+            transform: translateY(-2px);
+        }
 
 
 
         .project-button:hover {
             color: #000000;
-            background-color:white;
+            background-color: white;
             transform: translateY(-2px);
         }
     </style>
@@ -324,21 +337,24 @@ display: inline-block;
                     <stop offset="100%" stop-color="rgba(255,0,0, 0)"></stop>
                 </radialGradient>
             </defs>
-            <!--<rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient4)">
-      <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite" />
-      <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite" />
-      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="17s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient5)">
-      <animate attributeName="x" dur="23s" values="0%;-25%;0%" repeatCount="indefinite" />
-      <animate attributeName="y" dur="24s" values="25%;-25%;25%" repeatCount="indefinite" />
-      <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s" repeatCount="indefinite"/>
-      </rect>
-      <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient6)">
-      <animate attributeName="x" dur="25s" values="-25%;0%;-25%" repeatCount="indefinite" />
-      <animate attributeName="y" dur="26s" values="0%;-25%;0%" repeatCount="indefinite" />
-      <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="19s" repeatCount="indefinite"/>
-      </rect>-->
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient4)">
+                <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite" />
+                <animate attributeName="y" dur="21s" values="0%;25%;0%" repeatCount="indefinite" />
+                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="17s"
+                    repeatCount="indefinite" />
+            </rect>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient5)">
+                <animate attributeName="x" dur="23s" values="0%;-25%;0%" repeatCount="indefinite" />
+                <animate attributeName="y" dur="24s" values="25%;-25%;25%" repeatCount="indefinite" />
+                <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="18s"
+                    repeatCount="indefinite" />
+            </rect>
+            <rect x="0" y="0" width="100%" height="100%" fill="url(#Gradient6)">
+                <animate attributeName="x" dur="25s" values="-25%;0%;-25%" repeatCount="indefinite" />
+                <animate attributeName="y" dur="26s" values="0%;-25%;0%" repeatCount="indefinite" />
+                <animateTransform attributeName="transform" type="rotate" from="360 50 50" to="0 50 50" dur="19s"
+                    repeatCount="indefinite" />
+            </rect>
             <rect x="13.744%" y="1.18473%" width="100%" height="100%" fill="url(#Gradient1)"
                 transform="rotate(334.41 50 50)">
                 <animate attributeName="x" dur="20s" values="25%;0%;25%" repeatCount="indefinite"></animate>
@@ -387,107 +403,120 @@ display: inline-block;
                 <div class="project-content">
                     <h2>Airticket Online Booking Website</h2>
                     <p>This is the airline ticket booking website using only PHP, JS,CSS,HTML</p>
-                    <a href="https://github.com/Htet-2aung/Airline-Ticket-Booking-Website"><button class="project-button">Learn More</button></a>
-                    
+                    <a href="https://github.com/Htet-2aung/Airline-Ticket-Booking-Website"><button
+                            class="project-button">Learn More</button></a>
+
                     <div class="languages">
-                <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                    y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                    <style type="text/css">
-                        .st00 {
-                            fill: #F7DF1E;
-                        }
-                    </style>
-                    <g id="XMLID_1_">
-                        <rect id="XMLID_2_" x="67.5" y="67.5" class="st00" width="365" height="365" />
-                        <path id="XMLID_3_" d="M163.5,372.5l27.9-16.9c5.4,9.6,10.3,17.6,22,17.6c11.3,0,18.4-4.4,18.4-21.6V235.1h34.3v117.1
+                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                            <style type="text/css">
+                                .st00 {
+                                    fill: #F7DF1E;
+                                }
+                            </style>
+                            <g id="XMLID_1_">
+                                <rect id="XMLID_2_" x="67.5" y="67.5" class="st00" width="365" height="365" />
+                                <path id="XMLID_3_" d="M163.5,372.5l27.9-16.9c5.4,9.6,10.3,17.6,22,17.6c11.3,0,18.4-4.4,18.4-21.6V235.1h34.3v117.1
                 		c0,35.5-20.8,51.7-51.2,51.7C187.5,403.9,171.6,389.7,163.5,372.5" />
-                        <path id="XMLID_4_" d="M284.8,368.8l27.9-16.2c7.4,12,16.9,20.8,33.8,20.8c14.2,0,23.3-7.1,23.3-16.9c0-11.8-9.3-15.9-25-22.8
+                                <path id="XMLID_4_" d="M284.8,368.8l27.9-16.2c7.4,12,16.9,20.8,33.8,20.8c14.2,0,23.3-7.1,23.3-16.9c0-11.8-9.3-15.9-25-22.8
                 		l-8.6-3.7c-24.7-10.5-41.2-23.8-41.2-51.7c0-25.7,19.6-45.3,50.2-45.3c21.8,0,37.5,7.6,48.8,27.4l-26.7,17.1
                 		c-5.9-10.5-12.2-14.7-22-14.7c-10,0-16.4,6.4-16.4,14.7c0,10.3,6.4,14.5,21.1,20.8l8.6,3.7c29.2,12.5,45.6,25.2,45.6,53.9
                 		c0,30.9-24.3,47.8-56.8,47.8C315.4,403.9,294.8,388.7,284.8,368.8" />
-                    </g>
-                   
-                </svg>
+                            </g>
 
-                <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                    y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                    <style type="text/css">
-                        .st0 {
-                            fill: #1F72B5;
-                        }
-                
-                        .st1 {
-                            fill: #51A3DC;
-                        }
-                
-                        .st2 {
-                            fill: #EBEBEB;
-                        }
-                
-                        .st3 {
-                            fill: #CECECE;
-                        }
-                    </style>
-                    <g id="XMLID_1_">
-                        <polygon id="XMLID_11_" class="st0" points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
-                        <polygon id="XMLID_10_" class="st1" points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
-                        <polygon id="XMLID_35_" class="st2" points="167.1,222.1 164,192 336,192 334,226.9 261.3,259 331,259 323.5,358 253.2,376.9 
+                        </svg>
+
+                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                            <style type="text/css">
+                                .st0 {
+                                    fill: #1F72B5;
+                                }
+
+                                .st1 {
+                                    fill: #51A3DC;
+                                }
+
+                                .st2 {
+                                    fill: #EBEBEB;
+                                }
+
+                                .st3 {
+                                    fill: #CECECE;
+                                }
+                            </style>
+                            <g id="XMLID_1_">
+                                <polygon id="XMLID_11_" class="st0"
+                                    points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
+                                <polygon id="XMLID_10_" class="st1"
+                                    points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
+                                <polygon id="XMLID_35_" class="st2"
+                                    points="167.1,222.1 164,192 336,192 334,226.9 261.3,259 331,259 323.5,358 253.2,376.9 
                 		180.3,359.2 175.8,309 208,309 209.8,335.5 252,343.4 291,331.4 292.8,289 173,289 170.8,257.5 250,222.8 	" />
-                        <g id="XMLID_2_">
-                            <polygon id="XMLID_39_" class="st3" points="170.8,257.5 173,289 250,289 250,222.8 		" />
-                            <polygon id="XMLID_40_" class="st3"
-                                points="209.8,335.5 208,309 175.8,309 180.3,359.2 250,376.1 250,343 		" />
-                            <polygon id="XMLID_41_" class="st3" points="164,192 167.1,222.1 250,222.8 250,192 		" />
-                        </g>
-                        <g id="XMLID_36_">
-                            <polygon id="XMLID_34_"
-                                points="274,82 274,70 226,70 226,98 259,98 259,107 225,107 225,118 273,118 273,89 239,89 239,82 		" />
-                            <polygon id="XMLID_38_"
-                                points="187,98.3 187,107 221,107 221,118 173,118 173,89.3 173,70 220,70 220,82 187,82 		" />
-                            <polygon id="XMLID_37_"
-                                points="327,82 327,70 279,70 279,98 312,98 312,107 278,107 278,118 326,118 326,89 292,89 292,82 		" />
-                        </g>
-                    </g>
-                </svg>
-                
+                                <g id="XMLID_2_">
+                                    <polygon id="XMLID_39_" class="st3"
+                                        points="170.8,257.5 173,289 250,289 250,222.8 		" />
+                                    <polygon id="XMLID_40_" class="st3"
+                                        points="209.8,335.5 208,309 175.8,309 180.3,359.2 250,376.1 250,343 		" />
+                                    <polygon id="XMLID_41_" class="st3"
+                                        points="164,192 167.1,222.1 250,222.8 250,192 		" />
+                                </g>
+                                <g id="XMLID_36_">
+                                    <polygon id="XMLID_34_"
+                                        points="274,82 274,70 226,70 226,98 259,98 259,107 225,107 225,118 273,118 273,89 239,89 239,82 		" />
+                                    <polygon id="XMLID_38_"
+                                        points="187,98.3 187,107 221,107 221,118 173,118 173,89.3 173,70 220,70 220,82 187,82 		" />
+                                    <polygon id="XMLID_37_"
+                                        points="327,82 327,70 279,70 279,98 312,98 312,107 278,107 278,118 326,118 326,89 292,89 292,82 		" />
+                                </g>
+                            </g>
+                        </svg>
 
-                <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                    y="0px" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500;" xml:space="preserve">
-                    <style type="text/css">
-                        .st007 {
-                            fill: #E44D26;
-                        }
-                
-                        .st111 {
-                            fill: #F16529;
-                        }
-                
-                        .st222 {
-                            fill: #EBEBEB;
-                        }
-                
-                        .st333 {
-                            fill: #FFFFFF;
-                        }
-                    </style>
-                    <g id="XMLID_1_">
-                        <polygon id="XMLID_11_" class="st007" points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
-                        <polygon id="XMLID_10_" class="st111" points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
-                        <polygon id="XMLID_9_" class="st222" points="250,258.6 207.7,258.6 204.8,225.9 250,225.9 250,194 249.9,194 169.9,194 170.7,202.5 
+
+                        <svg width="50px" height="50px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 500 500"
+                            style="enable-background:new 0 0 500 500;" xml:space="preserve">
+                            <style type="text/css">
+                                .st007 {
+                                    fill: #E44D26;
+                                }
+
+                                .st111 {
+                                    fill: #F16529;
+                                }
+
+                                .st222 {
+                                    fill: #EBEBEB;
+                                }
+
+                                .st333 {
+                                    fill: #FFFFFF;
+                                }
+                            </style>
+                            <g id="XMLID_1_">
+                                <polygon id="XMLID_11_" class="st007"
+                                    points="145.7,401.1 122.5,140.7 377.5,140.7 354.3,401 249.8,430 	" />
+                                <polygon id="XMLID_10_" class="st111"
+                                    points="250,407.9 334.4,384.5 354.3,162 250,162 	" />
+                                <polygon id="XMLID_9_" class="st222" points="250,258.6 207.7,258.6 204.8,225.9 250,225.9 250,194 249.9,194 169.9,194 170.7,202.5 
                 		178.5,290.5 250,290.5 	" />
-                        <polygon id="XMLID_8_" class="st222" points="250,341.5 249.9,341.6 214.3,331.9 212,306.5 194.7,306.5 180,306.5 184.4,356.6 
+                                <polygon id="XMLID_8_" class="st222" points="250,341.5 249.9,341.6 214.3,331.9 212,306.5 194.7,306.5 180,306.5 184.4,356.6 
                 		249.9,374.8 250,374.7 	" />
-                        <path id="XMLID_7_" d="M146.2,70h16.2v16h14.8V70h16.2v48.5h-16.2v-16.3h-14.8v16.3h-16.2L146.2,70L146.2,70z" />
-                        <path id="XMLID_6_" d="M214.8,86.1h-14.3V70h44.8v16.1h-14.3v32.4h-16.2L214.8,86.1L214.8,86.1z" />
-                        <path id="XMLID_5_"
-                            d="M252.5,70h16.9l10.4,17.1L290.2,70h16.9v48.5H291V94.5l-11.2,17.3h-0.3l-11.2-17.3v24.1h-15.9V70z" />
-                        <path id="XMLID_4_" d="M315.2,70h16.2v32.5h22.8v16h-39V70z" />
-                        <polygon id="XMLID_3_" class="st333" points="249.9,258.6 249.9,290.5 289.2,290.5 285.5,331.9 249.9,341.5 249.9,374.8 315.3,356.6 
+                                <path id="XMLID_7_"
+                                    d="M146.2,70h16.2v16h14.8V70h16.2v48.5h-16.2v-16.3h-14.8v16.3h-16.2L146.2,70L146.2,70z" />
+                                <path id="XMLID_6_"
+                                    d="M214.8,86.1h-14.3V70h44.8v16.1h-14.3v32.4h-16.2L214.8,86.1L214.8,86.1z" />
+                                <path id="XMLID_5_"
+                                    d="M252.5,70h16.9l10.4,17.1L290.2,70h16.9v48.5H291V94.5l-11.2,17.3h-0.3l-11.2-17.3v24.1h-15.9V70z" />
+                                <path id="XMLID_4_" d="M315.2,70h16.2v32.5h22.8v16h-39V70z" />
+                                <polygon id="XMLID_3_" class="st333" points="249.9,258.6 249.9,290.5 289.2,290.5 285.5,331.9 249.9,341.5 249.9,374.8 315.3,356.6 
                 		315.8,351.2 323.3,267.2 324.1,258.6 315.5,258.6 	" />
-                        <polygon id="XMLID_2_" class="st333" points="249.9,194 249.9,213.8 249.9,225.8 249.9,225.9 326.9,225.9 326.9,225.9 327,225.9 
+                                <polygon id="XMLID_2_" class="st333" points="249.9,194 249.9,213.8 249.9,225.8 249.9,225.9 326.9,225.9 326.9,225.9 327,225.9 
                 		327.7,218.7 329.1,202.5 329.9,194 	" />
-                    </g>
-                </svg>
+                            </g>
+                        </svg>
 
                     </div>
                 </div>
@@ -498,12 +527,14 @@ display: inline-block;
                 <div class="project-content">
                     <h2>Spam Mail Detection with Python</h2>
                     <p>
-                        Spam mail detection using Python and Machine Learning. The model is trained on a dataset of 5000    emails and has an accuracy of 98%.
+                        Spam mail detection using Python and Machine Learning. The model is trained on a dataset of 5000
+                        emails and has an accuracy of 98%.
                     </p>
-                    <a href="https://github.com/Htet-2aung/Spam-Mail-Detection-With-Machine-Learning"><button class="project-button">Learn More</button></a>
+                    <a href="https://github.com/Htet-2aung/Spam-Mail-Detection-With-Machine-Learning"><button
+                            class="project-button">Learn More</button></a>
                     <div>
-                        <svg  width="50px" height="50px" version="1.1" id="Layer_1
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="500px" height="500px">
+                        <svg width="50px" height="50px" version="1.1" id="Layer_1
+                        xmlns=" http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="500px" height="500px">
                             <path fill="#0277BD"
                                 d="M24.047,5c-1.555,0.005-2.633,0.142-3.936,0.367c-3.848,0.67-4.549,2.077-4.549,4.67V14h9v2H15.22h-4.35c-2.636,0-4.943,1.242-5.674,4.219c-0.826,3.417-0.863,5.557,0,9.125C5.851,32.005,7.294,34,9.931,34h3.632v-5.104c0-2.966,2.686-5.896,5.764-5.896h7.236c2.523,0,5-1.862,5-4.377v-8.586c0-2.439-1.759-4.263-4.218-4.672C27.406,5.359,25.589,4.994,24.047,5z M19.063,9c0.821,0,1.5,0.677,1.5,1.502c0,0.833-0.679,1.498-1.5,1.498c-0.837,0-1.5-0.664-1.5-1.498C17.563,9.68,18.226,9,19.063,9z" />
                             <path fill="#FFC107"
@@ -516,12 +547,39 @@ display: inline-block;
                 <img src="https://picsum.photos/302/200" alt="Project 3">
                 <div class="project-content">
                     <h2>Project 3</h2>
-                    <p>Coming 
+                    <p>Coming
                         soon!
                     </p>
-                    <a href=""><button class="project-button" >Learn More</button></a>
+                    <a href=""><button class="project-button">Learn More</button></a>
                 </div>
             </div>
+
+            <div class="project">
+                <img src="https://picsum.photos/302/200" alt="Project 4">
+                <div class="project-content">
+                    <h2>Project 4</h2>
+                    <p>Coming
+                        soon!
+                    </p>
+                    <a href=""><button class="project-button">Learn More</button></a>
+                </div>
+
+
+            </div>
+
+            <div class="project">
+                <img src="https://picsum.photos/302/200" alt="Project 4">
+                <div class="project-content">
+                    <h2>Check Out All Projects On My Github</h2>
+                    <p>Coming
+                        soon!
+                    </p>
+                    <a href=""><button class="project-button">Learn More</button></a>
+                </div>
+
+            </div>
+
+
         </div>
     </section>
 
@@ -532,32 +590,34 @@ display: inline-block;
                 <div class="project-content">
                     <h2>Who am I?</h2>
                     <div class="photo-frame">
-                        <img src="IMG_20240717_191305_635.jpg"
-                            alt="">
+                        <img src="photo_2024-07-17_17-38-48.jpg" alt="">
                     </div>
                     <p>I am a third-year computer science student with a diverse skill set. My programming expertise
                         spans languages like
-                        Python, Java, R, and Rust, while I also have web development skills in PHP, HTML, CSS, and
-                        Apache servers and API
-                        Testing.</p>
+                        Python, R, Rust and SQL, while I also have web development skills in PHP, HTML, CSS, and my expertise in Linux Environments such as Ubuntu,Fedora,Debian and Arch Linux. I am also proficient in using tools like Git, Docker, and Jupyter Notebook. I am passionate about Machine Learning and willing to become an expert in this field. I am also a quick learner and a team player, and I am always eager to learn new things and take on new challenges. I am currently looking for internships and job opportunities in the field of Data Science and Machine Learning. </p>
+                        </p>
 
-                        <h2>Achievements</h2>
-                        <div class="achievements">
+                    <h2>Achievements</h2>
+                    <div class="achievements">
                         <ul class="certificates">
 
-<li>Technical Support Fundamentals Certificate, Google</li>
-<li>
-    Python for Data Science and AI Certificate, IBM
-</li>
+                            <li>Technical Support Fundamentals Certificate, Google</li>
+                            <li>
+                                Python for Data Science and AI Certificate, IBM
+                            </li>
 
-<li>
-    Introduction to Artificial Intelligence (AI), IBM 
-</li>
+                            <li>
+                                Introduction to Artificial Intelligence (AI), IBM
+                            </li>
+
+                            <li>
+                                Fully-funded scholarship awarded by Ton Duc Thang University, Vietnam
+                            </li>
 
                         </ul>
 
-                        </div>
-                       
+                    </div>
+
 
 
 
@@ -566,28 +626,10 @@ display: inline-block;
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="projects-container">
-            <div class="project">
-                <div class="project-content">
-                    <h2>Get in Touch</h2>
-                    <p>
-                        If you would like to collaborate on a project or just want to say hi, feel free to send me an
-                        email at kienbrowns1129@gmail.com
-                       
-                    
- 
-
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="footer">
-       
+
         <ul class="social-icon">
             <li class="social-icon__item"><a class="social-icon__link" href="https://github.com/Htet-2aung">
                     <ion-icon name="logo-github"></ion-icon>
@@ -608,7 +650,7 @@ display: inline-block;
             <li class="menu__item"><a class="menu__link" href="#">Projects</a></li>
             <li class="menu__item"><a class="menu__link" href="#">Team</a></li>
             <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
-    
+
         </ul>
         <p>&copy;2024 Kien Brown | All Rights Reserved</p>
     </footer>
