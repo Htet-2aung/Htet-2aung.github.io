@@ -13,7 +13,170 @@
             font-family: 'Courier New', Courier, monospace;
 
         }
+        body.light-mode {
+            margin: 0;
+            background-color: #ffffff;
+            font-family: 'Courier New', Courier, monospace;
 
+        }
+        
+          .toggle {
+
+            font-size: .8em;
+            border: .125em solid currentColor;
+            border-radius: 2em;
+            cursor: pointer;
+            border-color: #0808085e;
+            display: block;
+            height: 2em;
+            
+            background-color: #ffffff;
+            position: relative;
+            width: 3.75em;
+            margin-left: 1rem;
+            
+           margin-top: 0px;
+
+        }
+       
+        .toggle:hover{
+            
+            font-size: .8em;
+            border: .185em solid currentColor;
+            border-radius: 2.5em;
+            cursor: pointer;
+            display: block;
+            height: 2.356em;
+            background-color: #faf5f5;
+            position: relative;
+            width: 3.9em;
+            margin-left: 1rem;
+           margin-bottom: .5rem;
+        }
+
+
+        .toggle span {
+            background-color: currentColor;
+            border-radius: 2em;
+            display: block;
+            height: 1.5em;
+            left: .25em;
+           
+            overflow: hidden;
+            position: absolute;
+            top: .25em;
+            text-indent: -9999px;
+            transition: left .25s;
+            width: 1.5em;
+            z-index: 2;
+        }
+
+
+        .toggle::before,
+        .toggle::after {
+            content: '';
+
+            display: block;
+            border-radius: 1em;
+            position: absolute;
+            z-index: 1;
+        }
+        .toggle::after {
+           background-color: #ffc409;
+            height: .625em;
+            outline: .25em dotted #ffc409;
+            outline-offset: .125em;
+            left: .7em;
+            top: .7em;
+            width: .625em;
+        }
+        .sr-only {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+}
+
+        .toggle::before {
+            box-shadow: .25em .25em #5901d8;
+            height: 1.125em;
+            right: .9em;
+            top: .125em;
+            width: 1.125em;
+            
+        }
+        input:checked ~ .toggle span {
+            left: 2em;
+           
+
+            
+        }
+        .light-mode background{
+ position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            z-index: -1;
+            background-size: 100% 200vh;
+            background-position: 0% 0%;
+            animation: scroll 30s linear infinite;
+        }
+
+        .light-mode nav{
+             background-color: #f7f4f4c4;
+            padding: 1rem;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            font-size: medium;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .light-mode nav a {
+             color: #030303;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: color 0.3s ease;
+        }
+        .light-mode nav a:hover {
+             background-color: #030303;
+            border-radius: 7px;
+            padding: 9px 10px;
+            color: #fafafa;
+        } 
+
+        .light-mode .hero-button{
+             display: inline-block;
+            outline: 0;
+            border: 0;
+            font-family: 'Times New Roman', Times, serif;
+            cursor: pointer;
+            background: #ffffff7c;
+            color: #FFFFFF;
+            border-radius: 8px;
+            padding: 14px 24px 16px;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1;
+            transition: transform 200ms, background 200ms;
+        }
+
+        .light-mode footer{
+            position: absolute;
+            width: 100%;
+            background: #07070756;
+            color: #000000;
+            
+            min-height: 100px;
+            padding: 20px 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+        }
+      
+      
         .background {
             position: fixed;
             top: 0;
@@ -378,13 +541,18 @@
             </rect>
         </svg>
     </div>
-
     <!-- Navigation -->
     <nav>
+        
         <a href="#hero">Home</a>
         <a href="#projects">Projects</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
+        <input onchange="toggleLightMode()" type="checkbox" class="sr-only" id="darkmode-toggle">
+        <label for="darkmode-toggle" class="toggle">
+            <span></span>
+        </label>
+
     </nav>
 
     <!-- Hero Section -->
@@ -590,7 +758,7 @@
                 <div class="project-content">
                     <h2>Who am I?</h2>
                     <div class="photo-frame">
-                        <img src="IMG_20240717_191305_635.jpg" alt="My Photo">
+                        <img src="photo_2024-07-17_17-38-48.jpg" alt="">
                     </div>
                     <p>I am a third-year computer science student with a diverse skill set. My programming expertise
                         spans languages like
@@ -652,7 +820,7 @@
             <li class="menu__item"><a class="menu__link" href="#">Contact</a></li>
 
         </ul>
-        <p>&copy;2024 Kien Brown | All Rights Reserved</p>
+        <p>&copy;2024 Htet Aung | All Rights Reserved</p>
     </footer>
 
     <script>
@@ -670,9 +838,18 @@
                 rect.beginElement();
             });
         });
+
+        
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+    <script>
+        function toggleLightMode() {
+            document.body.classList.toggle("light-mode");
+        }
+    </script>
 </body>
 
 </html>
