@@ -233,6 +233,59 @@
             color: #080808;
         }
 
+        @keyframes rainbowGlow {
+  0% {
+    box-shadow: 0 0 10px red,
+                0 0 20px orange,
+                0 0 30px yellow,
+                0 0 40px green,
+                0 0 50px blue,
+                0 0 60px indigo,
+                0 0 70px violet;
+  }
+  50% {
+    box-shadow: 0 0 20px violet,
+                0 0 30px indigo,
+                0 0 40px blue,
+                0 0 50px green,
+                0 0 60px yellow,
+                0 0 70px orange,
+                0 0 80px red;
+  }
+  100% {
+    box-shadow: 0 0 10px red,
+                0 0 20px orange,
+                0 0 30px yellow,
+                0 0 40px green,
+                0 0 50px blue,
+                0 0 60px indigo,
+                0 0 70px violet;
+  }
+}
+
+
+        nav button {
+    position: absolute;
+    top: 10px;
+    right: 100px;
+
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background-image: url('/china.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    outline: none;
+    z-index: 1000;
+    transition: box-shadow 0.3s ease;
+}
+nav button:hover {
+    animation: rainbowGlow 2s infinite alternate;
+  transform: scale(1.1);
+}
         .hero {
 
             image-rendering: optimizeQuality;
@@ -418,7 +471,7 @@
         }
 
         .hero-button:hover {
-            background-color: #f8f5f5;
+            background-color: #f8f5f5c9;
             border-radius: 7px;
             padding: 12px 24px 16px;
             color: #080808;
@@ -426,7 +479,10 @@
 
             transform: translateY(-2px);
         }
-
+        
+        .explore:hover{
+            color: #000000;
+        }
 
         .project-button {
             display: inline-block;
@@ -582,9 +638,11 @@
         <a href="index.html">Home</a>
         <a href="projects.html">Projects</a>
         <a href="#about">About</a>
-        <a href="contact.html">Contact</a>
+        <a href="https://htetaung.me/contact.html">Contact</a>
+        <button id="language-switch"  title="Switch to Chinese" type="langauge-button"></button>
         
     </nav>
+   
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
@@ -737,7 +795,7 @@
             </div>
             
 
-           
+               
            
            
                 
@@ -885,6 +943,14 @@
                 console.error('Error fetching repositories:', error);
             });
     </script>
+   <script>
+    document.getElementById('language-switch').addEventListener('click', function () {
+      // Replace with the actual URL of your Chinese version
+      window.location.href = './ch.html';
+    });
+  </script>
+  
+  
 </body>
 
 </html>
