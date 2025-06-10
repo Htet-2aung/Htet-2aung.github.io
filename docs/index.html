@@ -210,6 +210,11 @@ section {
 .hero-section {
     min-height: 100vh;
     display: flex;
+    /* --- FIX: Override generic section styles for full width --- */
+    max-width: none; /* Remove the max-width constraint */
+    padding-left: 0; /* Remove horizontal padding */
+    padding-right: 0;
+    
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -226,11 +231,11 @@ section {
 .hero-background {
     position: absolute;
     top: -10%; left: -10%;
-    width: 120%; height: 120%;
+    width: 250%; height: 120%;
     z-index: 0;
-    background: radial-gradient(circle at 20% 25%, rgba(0, 124, 240, 0.4), transparent 30%),
-                radial-gradient(circle at 80% 30%, rgba(255, 0, 255, 0.3), transparent 35%),
-                radial-gradient(circle at 50% 80%, rgba(0, 255, 255, 0.4), transparent 40%);
+    background: radial-gradient(circle at 20% 25%, rgba(0, 0, 240, 0.4), transparent 30%),
+                radial-gradient(circle at 80% 30%, rgba(0, 255, 157, 0.3), transparent 35%),
+                radial-gradient(circle at 50% 80%, rgba(255, 0, 238, 0.4), transparent 40%);
     background-size: 200% 200%;
     animation: animated-gradient 25s ease infinite;
     filter: blur(100px);
