@@ -226,14 +226,25 @@
             color: var(--primary-color);
         }
 
-        .detail-image {
+        /* Updated styling for the video container */
+        .detail-video-container {
             width: 100%;
-            height: 400px;
-            background-size: cover;
-            background-position: center;
+            height: 400px; /* Fixed height for consistency */
             border-radius: 10px;
             margin-bottom: 2rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            overflow: hidden; /* Ensure video respects border-radius */
+            background-color: #000; /* Fallback background for video area */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .detail-video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the container while maintaining aspect ratio */
+            border-radius: 10px; /* Apply border-radius to the video itself */
         }
 
         .detail-description {
@@ -316,7 +327,7 @@
                 font-size: 2.2rem;
             }
 
-            .detail-image {
+            .detail-video-container {
                 height: 250px;
             }
 
@@ -365,7 +376,12 @@
     <main>
         <section class="project-detail-container">
             <h1 class="detail-title" id="project-detail-title"></h1>
-            <div class="detail-image" id="project-detail-image"></div>
+            <!-- Changed from div to video tag -->
+            <div class="detail-video-container">
+                <video id="project-detail-video" controls autoplay loop muted playsinline>
+                    Your browser does not support the video tag.
+                </video>
+            </div>
             <p class="detail-description" id="project-detail-description"></p>
 
             <h3 class="detail-section-heading">Key Features</h3>
@@ -437,7 +453,8 @@
             const projects = {
                 "plate-ai": {
                     title: "PLATE.AI",
-                    image: "https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true",
+                    // Changed from 'image' to 'video'
+                    video: "https://github.com/Htet-2aung/PLATE.AI/raw/main/assets/demo.webm", // Example WebM video URL
                     description: "A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates. This project leverages advanced computer vision techniques and machine learning models to provide robust performance in diverse environmental conditions. It features a responsive user interface built with React, ensuring a seamless experience across devices, and a powerful Python backend for efficient data processing and model inference. The system is designed for scalability and can be integrated into various applications requiring automated license plate recognition.",
                     features: [
                         "Real-time license plate detection and recognition with high accuracy.",
@@ -455,7 +472,8 @@
                 },
                 "podcasty": {
                     title: "Podcasty",
-                    image: "https://github.com/Htet-2aung/Podcasty/raw/main/assets/demo2.png?raw=true",
+                    // Changed from 'image' to 'video'
+                    video: "https://github.com/Htet-2aung/Podcasty/raw/main/assets/podcasty-demo.webm", // Example WebM video URL
                     description: "Podcasty is a progressive web application (PWA) designed to provide a seamless and enjoyable podcast listening experience. It combines a modern, intuitive user interface with robust backend services to deliver a wide range of podcasts. The PWA capabilities ensure that users can access their favorite shows even offline, and enjoy a native-app-like experience directly from their browser. This project emphasizes performance, accessibility, and a smooth user journey.",
                     features: [
                         "Listen to a vast library of podcasts on demand.",
@@ -474,7 +492,8 @@
                 },
                 "cryptography-playground": {
                     title: "Cryptography Playground",
-                    image: "https://github.com/Htet-2aung/Cryptography-Playground/raw/main/screenshot.png",
+                    // Changed from 'image' to 'video'
+                    video: "https://github.com/Htet-2aung/Cryptography-Playground/raw/main/assets/crypto-demo.webm", // Example WebM video URL
                     description: "The Cryptography Playground is an interactive web-based tool designed to demystify complex cryptographic algorithms. It provides a hands-on environment where users can experiment with various encryption and decryption methods, observe their mechanics, and understand the underlying principles of cybersecurity. This project serves as an educational resource for students, developers, and anyone interested in the fundamentals of data security and privacy.",
                     features: [
                         "Interactive visualization of encryption and decryption processes.",
@@ -510,7 +529,12 @@
             if (project) {
                 document.getElementById('detail-page-title').textContent = `${project.title} | Htet Aung Portfolio`;
                 document.getElementById('project-detail-title').textContent = project.title;
-                document.getElementById('project-detail-image').style.backgroundImage = `url('${project.image}')`;
+
+                // Updated to handle video instead of image
+                const videoElement = document.getElementById('project-detail-video');
+                videoElement.src = project.video;
+                videoElement.style.display = 'block'; // Ensure video is visible
+
                 document.getElementById('project-detail-description').textContent = project.description;
 
                 const featuresList = document.getElementById('project-detail-features');
@@ -546,7 +570,7 @@
                 document.getElementById('detail-page-title').textContent = "Project Not Found | Htet Aung Portfolio";
                 document.getElementById('project-detail-title').textContent = "Project Not Found";
                 document.getElementById('project-detail-description').textContent = "The requested project could not be found. Please return to the main portfolio page.";
-                document.getElementById('project-detail-image').style.display = 'none'; // Hide image
+                document.getElementById('project-detail-video').style.display = 'none'; // Hide video element
                 document.getElementById('project-detail-features').style.display = 'none';
                 document.getElementById('project-detail-tags').style.display = 'none';
                 document.getElementById('project-detail-links').style.display = 'none';
