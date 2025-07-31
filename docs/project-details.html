@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="detail-page-title">Project Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Re-use your existing CSS variables and general styling */
+        :root {
+            --font-family: 'Space Grotesk', sans-serif;
+            --bg-color: #0a0a0a;
+            --card-bg-color: rgba(22, 22, 22, 0.7);
+            --primary-color: #ffffff;
+            --secondary-color: #a0a0a0;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-color: #007cf0;
+            --timeline-color: #007cf0;
+            --header-bg: rgba(10, 10, 10, 0.5);
+        }
+
+        body.light-mode {
+            --bg-color: #f5f5f7;
+            --card-bg-color: #ffffff;
+            --primary-color: #1d1d1f;
+            --secondary-color: #515154;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --accent-color: #007aff;
+            --timeline-color: #007aff;
+            --header-bg: rgba(245, 245, 247, 0.7);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            font-family: var(--font-family);
+            line-height: 1.6;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .main-header {
+            position: sticky; /* Changed to sticky for better visibility on a single page */
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1rem 5%;
+            background: var(--header-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 9px 15px;
+            border-radius: 999px;
+            z-index: 1;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-color);
+            border-radius: 999px;
+            transform: scaleX(0);
+            transform-origin: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::before {
+            transform: scaleX(1);
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        #theme-toggle {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            transition: color 0.3s, background-color 0.3s, border-color 0.3s, transform 0.3s;
+        }
+
+        #theme-toggle:hover {
+            color: var(--primary-color);
+            background-color: var(--border-color);
+            transform: rotate(180deg);
+        }
+
+        /* Language Selector (from your original CSS) */
+        .language-selector {
+            position: relative;
+            display: inline-block;
+        }
+
+        .language-button {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-family);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .language-button:hover,
+        .language-selector:hover .language-button {
+            background-color: var(--border-color);
+            color: var(--primary-color);
+        }
+
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            top: 120%;
+            right: 0;
+            background-color: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            overflow: hidden;
+            padding: 0.5rem 0;
+        }
+
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+
+        .language-dropdown a {
+            color: var(--secondary-color);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.2s, color 0.2s;
+        }
+
+        .language-dropdown a:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+
+        /* New styles for the project details page */
+        .project-detail-container {
+            max-width: 900px;
+            margin: 4rem auto; /* Adjusted margin to prevent overlap with sticky header */
+            padding: 2rem 5%;
+            background: var(--card-bg-color);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .detail-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 400px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .detail-description {
+            font-size: 1.1rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-section-heading {
+            font-size: 1.8rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .detail-text-content {
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .detail-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-tags span {
+            background: var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+        }
+
+        .detail-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .detail-link-button {
+            display: inline-block;
+            background: var(--accent-color);
+            color: #fff;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .detail-link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 124, 240, 0.4);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 2rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .back-button:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .detail-title {
+                font-size: 2.2rem;
+            }
+
+            .detail-image {
+                height: 250px;
+            }
+
+            .detail-section-heading {
+                font-size: 1.5rem;
+            }
+
+            .detail-link-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <nav class="main-nav">
+            <div class="logo">Htet Aung</div>
+            <ul class="nav-links">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="index.html#experience">Experience</a></li>
+                <li><a href="index.html#projects">Projects</a></li>
+                <li><a href="index.html#demos">Demos</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="nav-controls">
+                <div class="language-selector">
+                    <button class="language-button"><i class="fas fa-globe"></i> EN</button>
+                    <div class="language-dropdown">
+                        <a href="index.html">English</a>
+                        <a href="ch.html">中文 (Chinese)</a>
+                        <a href="jp.html">日本語 (Japanese)</a>
+                        <a href="es.html">Español (Spanish)</a>
+                        <a href="vi.html">Tiếng Việt (Vietnamese)</a>
+                    </div>
+                </div>
+                <button id="theme-toggle" title="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="project-detail-container">
+            <h1 class="detail-title" id="project-detail-title"></h1>
+            <div class="detail-image" id="project-detail-image"></div>
+            <p class="detail-description" id="project-detail-description"></p>
+
+            <h3 class="detail-section-heading">Key Features</h3>
+            <ul id="project-detail-features">
+                <!-- Features will be loaded here by JavaScript -->
+            </ul>
+
+            <h3 class="detail-section-heading">Technologies Used</h3>
+            <div class="detail-tags" id="project-detail-tags">
+                <!-- Tags will be loaded here by JavaScript -->
+            </div>
+
+            <div class="detail-links" id="project-detail-links">
+                <!-- Links will be loaded here by JavaScript -->
+            </div>
+
+            <a href="index.html#demos" class="back-button"><i class="fas fa-arrow-left"></i> Back to Demos</a>
+        </section>
+    </main>
+
+    <footer class="main-footer-bottom">
+        <div class="social-links">
+            <a href="https://github.com/Htet-2aung" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://htetaung.me" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
+            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+        </div>
+        <p>&copy; 2025 Htet Aung | All Rights Reserved</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Theme Toggler functionality (copy from your original script)
+            const themeToggleButton = document.getElementById('theme-toggle');
+            const body = document.body;
+            const themeIcon = themeToggleButton.querySelector('i');
+
+            const applyTheme = (theme) => {
+                body.classList.remove('light-mode', 'dark-mode');
+                body.classList.add(theme);
+                themeIcon.className = theme === 'light-mode' ? 'fas fa-moon' : 'fas fa-sun';
+                localStorage.setItem('theme', theme);
+            };
+
+            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
+            applyTheme(savedTheme);
+
+            themeToggleButton.addEventListener('click', () => {
+                const newTheme = body.classList.contains('light-mode') ? 'dark-mode' : 'light-mode';
+                applyTheme(newTheme);
+            });
+
+            // Smooth Scrolling for Navigation - adapted for this single page
+            document.querySelectorAll('.nav-links a[href^="index.html#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    const targetId = href.split('#')[1];
+                    // If linking to a section on the same page (index.html), redirect and scroll
+                    if (window.location.pathname.includes('project-details.html')) {
+                        e.preventDefault();
+                        window.location.href = `index.html#${targetId}`;
+                    }
+                    // If already on index.html, regular smooth scroll
+                    // (This part would be in index.html's script)
+                });
+            });
+
+
+            // Project Data (replace with your actual data)
+            const projects = {
+                "plate-ai": {
+                    title: "PLATE.AI",
+                    image: "https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true",
+                    description: "A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates. This project leverages advanced computer vision techniques and machine learning models to provide robust performance in diverse environmental conditions. It features a responsive user interface built with React, ensuring a seamless experience across devices, and a powerful Python backend for efficient data processing and model inference. The system is designed for scalability and can be integrated into various applications requiring automated license plate recognition.",
+                    features: [
+                        "Real-time license plate detection and recognition with high accuracy.",
+                        "Custom-trained deep learning models for optimal performance on Vietnamese plates.",
+                        "Intuitive and responsive user interface built with React.",
+                        "Robust Python backend for image processing and model serving.",
+                        "Supports various image inputs (live camera feed, uploaded files).",
+                        "Detailed logging and reporting of detection results."
+                    ],
+                    tags: ["React JS", "Machine Learning", "Deep Learning", "Computer Vision", "Python", "Flask", "OpenCV", "TensorFlow/PyTorch", "Frontend", "Backend"],
+                    links: [
+                        { text: "Live Demo", url: "https://plate-ai-theta.vercel.app" },
+                        { text: "View on GitHub", url: "https://github.com/Htet-2aung/PLATE.AI" }
+                    ]
+                },
+                "podcasty": {
+                    title: "Podcasty",
+                    image: "https://github.com/Htet-2aung/Podcasty/raw/main/assets/demo2.png?raw=true",
+                    description: "Podcasty is a progressive web application (PWA) designed to provide a seamless and enjoyable podcast listening experience. It combines a modern, intuitive user interface with robust backend services to deliver a wide range of podcasts. The PWA capabilities ensure that users can access their favorite shows even offline, and enjoy a native-app-like experience directly from their browser. This project emphasizes performance, accessibility, and a smooth user journey.",
+                    features: [
+                        "Listen to a vast library of podcasts on demand.",
+                        "Progressive Web App (PWA) features for offline access and installability.",
+                        "Responsive design ensures optimal viewing on mobile, tablet, and desktop.",
+                        "Modern and clean user interface for easy navigation.",
+                        "Built with TypeScript for type safety and maintainability.",
+                        "Efficient backend powered by Node.js and Express for data handling.",
+                        "Search and discovery features to find new podcasts."
+                    ],
+                    tags: ["Typescript", "PWA", "Node.js", "Express", "React", "Web Development", "Audio Streaming", "UX/UI Design"],
+                    links: [
+                        { text: "Live Demo", url: "https://podcasty-two.vercel.app" },
+                        { text: "View on GitHub", url: "https://github.com/Htet-2aung/Podcasty" }
+                    ]
+                },
+                "cryptography-playground": {
+                    title: "Cryptography Playground",
+                    image: "https://github.com/Htet-2aung/Cryptography-Playground/raw/main/screenshot.png",
+                    description: "The Cryptography Playground is an interactive web-based tool designed to demystify complex cryptographic algorithms. It provides a hands-on environment where users can experiment with various encryption and decryption methods, observe their mechanics, and understand the underlying principles of cybersecurity. This project serves as an educational resource for students, developers, and anyone interested in the fundamentals of data security and privacy.",
+                    features: [
+                        "Interactive visualization of encryption and decryption processes.",
+                        "Support for multiple classic and modern cryptographic algorithms (e.g., Caesar Cipher, Vigenere Cipher, RSA, AES).",
+                        "Step-by-step explanations of how each algorithm works.",
+                        "Input fields for custom text and keys to see real-time results.",
+                        "Educational insights into the strengths and weaknesses of different ciphers.",
+                        "Developed using React for a dynamic and engaging user experience.",
+                        "Deployed on Vercel for easy access and high performance."
+                    ],
+                    tags: ["Cyber Security", "JavaScript", "React", "Algorithms", "Cryptography", "Education", "Web Development", "Vercel"],
+                    links: [
+                        { text: "Live Demo", url: "https://cryptography-playground.vercel.app" },
+                        { text: "View on GitHub", url: "https://github.com/Htet-2aung/Cryptography-Playground" }
+                    ]
+                }
+                // Add more projects here as needed, using unique keys
+            };
+
+            // Function to get URL parameters
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                const results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            // Get the project ID from the URL
+            const projectId = getUrlParameter('project');
+            const project = projects[projectId];
+
+            // Populate the page if project data exists
+            if (project) {
+                document.getElementById('detail-page-title').textContent = `${project.title} | Htet Aung Portfolio`;
+                document.getElementById('project-detail-title').textContent = project.title;
+                document.getElementById('project-detail-image').style.backgroundImage = `url('${project.image}')`;
+                document.getElementById('project-detail-description').textContent = project.description;
+
+                const featuresList = document.getElementById('project-detail-features');
+                featuresList.innerHTML = ''; // Clear existing content
+                project.features.forEach(feature => {
+                    const li = document.createElement('li');
+                    li.textContent = feature;
+                    li.style.color = 'var(--secondary-color)'; // Apply secondary color
+                    featuresList.appendChild(li);
+                });
+
+                const tagsContainer = document.getElementById('project-detail-tags');
+                tagsContainer.innerHTML = ''; // Clear existing content
+                project.tags.forEach(tag => {
+                    const span = document.createElement('span');
+                    span.textContent = tag;
+                    tagsContainer.appendChild(span);
+                });
+
+                const linksContainer = document.getElementById('project-detail-links');
+                linksContainer.innerHTML = ''; // Clear existing content
+                project.links.forEach(link => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.target = "_blank";
+                    a.rel = "noopener noreferrer"; // Security best practice
+                    a.classList.add('detail-link-button');
+                    a.textContent = link.text;
+                    linksContainer.appendChild(a);
+                });
+            } else {
+                // Handle case where project ID is not found
+                document.getElementById('detail-page-title').textContent = "Project Not Found | Htet Aung Portfolio";
+                document.getElementById('project-detail-title').textContent = "Project Not Found";
+                document.getElementById('project-detail-description').textContent = "The requested project could not be found. Please return to the main portfolio page.";
+                document.getElementById('project-detail-image').style.display = 'none'; // Hide image
+                document.getElementById('project-detail-features').style.display = 'none';
+                document.getElementById('project-detail-tags').style.display = 'none';
+                document.getElementById('project-detail-links').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
