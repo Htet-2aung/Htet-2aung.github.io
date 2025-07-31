@@ -48,7 +48,7 @@
         }
 
         .main-header {
-            position: sticky; /* Changed to sticky for better visibility on a single page */
+            position: sticky;
             top: 0;
             left: 0;
             width: 100%;
@@ -205,7 +205,7 @@
         /* New styles for the project details page */
         .project-detail-container {
             max-width: 900px;
-            margin: 4rem auto; /* Adjusted margin to prevent overlap with sticky header */
+            margin: 4rem auto;
             padding: 2rem 5%;
             background: var(--card-bg-color);
             border: 1px solid var(--border-color);
@@ -226,25 +226,25 @@
             color: var(--primary-color);
         }
 
-        /* Updated styling for the video container */
-        .detail-video-container {
+        /* Styling for the media container (now handles images/gifs) */
+        .detail-media-container {
             width: 100%;
             height: 400px; /* Fixed height for consistency */
             border-radius: 10px;
             margin-bottom: 2rem;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-            overflow: hidden; /* Ensure video respects border-radius */
-            background-color: #000; /* Fallback background for video area */
+            overflow: hidden; /* Ensure media respects border-radius */
+            background-color: #000; /* Fallback background */
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .detail-video-container video {
+        .detail-media-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover the container while maintaining aspect ratio */
-            border-radius: 10px; /* Apply border-radius to the video itself */
+            object-fit: contain; /* Use 'contain' for GIFs to ensure they fit without cropping */
+            border-radius: 10px;
         }
 
         .detail-description {
@@ -327,7 +327,7 @@
                 font-size: 2.2rem;
             }
 
-            .detail-video-container {
+            .detail-media-container {
                 height: 250px;
             }
 
@@ -376,11 +376,9 @@
     <main>
         <section class="project-detail-container">
             <h1 class="detail-title" id="project-detail-title"></h1>
-            <!-- Changed from div to video tag -->
-            <div class="detail-video-container">
-                <video id="project-detail-video" controls autoplay loop muted playsinline>
-                    Your browser does not support the video tag.
-                </video>
+            <!-- Changed from video to img tag for GIFs -->
+            <div class="detail-media-container">
+                <img id="project-detail-image" alt="Project Demo GIF">
             </div>
             <p class="detail-description" id="project-detail-description"></p>
 
@@ -413,7 +411,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
-            // Theme Toggler functionality (copy from your original script)
+            // Theme Toggler functionality
             const themeToggleButton = document.getElementById('theme-toggle');
             const body = document.body;
             const themeIcon = themeToggleButton.querySelector('i');
@@ -443,8 +441,6 @@
                         e.preventDefault();
                         window.location.href = `index.html#${targetId}`;
                     }
-                    // If already on index.html, regular smooth scroll
-                    // (This part would be in index.html's script)
                 });
             });
 
@@ -453,8 +449,8 @@
             const projects = {
                 "plate-ai": {
                     title: "PLATE.AI",
-                    // Changed from 'image' to 'video'
-                    video: "https://github.com/Htet-2aung/PLATE.AI/raw/main/assets/demo.webm", // Example WebM video URL
+                    // Changed to 'image' for GIF
+                    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2p4d3RzZ20yY3R2c3J0dG15dG5wYnJ2b25tZ2U2b2F3d25pY2t4b20mdXJsPWh0dHBzJTNBJTJGJTJGZ2lwaHkuY29tJTJGZ2lmcyUyRm1hY2hpbmUtbGVhcm5pbmctZ2lmLXhpZlV0Ym9jN0d3V01jOW93dSZhbmQ9Z2lmLmNsaXBz/xifUtboc7GwWMc9owu/giphy.gif", // Example GIF URL
                     description: "A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates. This project leverages advanced computer vision techniques and machine learning models to provide robust performance in diverse environmental conditions. It features a responsive user interface built with React, ensuring a seamless experience across devices, and a powerful Python backend for efficient data processing and model inference. The system is designed for scalability and can be integrated into various applications requiring automated license plate recognition.",
                     features: [
                         "Real-time license plate detection and recognition with high accuracy.",
@@ -472,8 +468,8 @@
                 },
                 "podcasty": {
                     title: "Podcasty",
-                    // Changed from 'image' to 'video'
-                    video: "https://github.com/Htet-2aung/Htet-2aung.github.io/blob/main/docs/Screen%20recording%202025-07-31%202.40.28%20PM.webm", // Example WebM video URL
+                    // Changed to 'image' for GIF
+                    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2p4d3RzZ20yY3R2c3J0dG15dG5wYnJ2b25tZ2U2b2F3d25pY2t4b20mdXJsPWh0dHBzJTNBJTJGJTJGZ2lwaHkuY29tJTJGZ2lmcyUyRm1hY2hpbmUtbGVhcm5pbmctZ2lmLXhpZlV0Ym9jN0d3V01jOW93dSZhbmQ9Z2lmLmNsaXBz/xifUtboc7GwWMc9owu/giphy.gif", // Example GIF URL
                     description: "Podcasty is a progressive web application (PWA) designed to provide a seamless and enjoyable podcast listening experience. It combines a modern, intuitive user interface with robust backend services to deliver a wide range of podcasts. The PWA capabilities ensure that users can access their favorite shows even offline, and enjoy a native-app-like experience directly from their browser. This project emphasizes performance, accessibility, and a smooth user journey.",
                     features: [
                         "Listen to a vast library of podcasts on demand.",
@@ -492,8 +488,8 @@
                 },
                 "cryptography-playground": {
                     title: "Cryptography Playground",
-                    // Changed from 'image' to 'video'
-                    video: "https://github.com/Htet-2aung/Cryptography-Playground/raw/main/assets/crypto-demo.webm", // Example WebM video URL
+                    // Changed to 'image' for GIF
+                    image: "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExd2p4d3RzZ20yY3R2c3J0dG15dG5wYnJ2b25tZ2U2b2F3d25pY2t4b20mdXJsPWh0dHBzJTNBJTJGJTJGZ2lwaHkuY29tJTJGZ2lmcyUyRm1hY2hpbmUtbGVhcm5pbmctZ2lmLXhpZlV0Ym9jN0d3V01jOW93dSZhbmQ9Z2lmLmcl2lwcw/xifUtboc7GwWMc9owu/giphy.gif", // Example GIF URL
                     description: "The Cryptography Playground is an interactive web-based tool designed to demystify complex cryptographic algorithms. It provides a hands-on environment where users can experiment with various encryption and decryption methods, observe their mechanics, and understand the underlying principles of cybersecurity. This project serves as an educational resource for students, developers, and anyone interested in the fundamentals of data security and privacy.",
                     features: [
                         "Interactive visualization of encryption and decryption processes.",
@@ -530,10 +526,10 @@
                 document.getElementById('detail-page-title').textContent = `${project.title} | Htet Aung Portfolio`;
                 document.getElementById('project-detail-title').textContent = project.title;
 
-                // Updated to handle video instead of image
-                const videoElement = document.getElementById('project-detail-video');
-                videoElement.src = project.video;
-                videoElement.style.display = 'block'; // Ensure video is visible
+                // Updated to handle image (GIF) instead of video
+                const imageElement = document.getElementById('project-detail-image');
+                imageElement.src = project.image;
+                imageElement.style.display = 'block'; // Ensure image is visible
 
                 document.getElementById('project-detail-description').textContent = project.description;
 
@@ -570,7 +566,7 @@
                 document.getElementById('detail-page-title').textContent = "Project Not Found | Htet Aung Portfolio";
                 document.getElementById('project-detail-title').textContent = "Project Not Found";
                 document.getElementById('project-detail-description').textContent = "The requested project could not be found. Please return to the main portfolio page.";
-                document.getElementById('project-detail-video').style.display = 'none'; // Hide video element
+                document.getElementById('project-detail-image').style.display = 'none'; // Hide image element
                 document.getElementById('project-detail-features').style.display = 'none';
                 document.getElementById('project-detail-tags').style.display = 'none';
                 document.getElementById('project-detail-links').style.display = 'none';
