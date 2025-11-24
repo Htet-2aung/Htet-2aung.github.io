@@ -1,720 +1,751 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Htet Aung | Creative Developer & AI Enthusiast</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap"
-        rel="stylesheet">
+    <title>Htet Aung | Ubuntu Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Ubuntu+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-     <style>
+
+    <style>
         :root {
-            --font-family: 'Space Grotesk', sans-serif;
-            /* Default Dark Theme */
-            --bg-color: #0a0a0a;
-            --card-bg-color: rgba(22, 22, 22, 0.7);
-            --primary-color: #ffffff;
-            --secondary-color: #a0a0a0;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --accent-color: #007cf0;
-            --timeline-color: #007cf0;
-            --header-bg: rgba(10, 10, 10, 0.5);
+            --ubuntu-orange: #E95420;
+            --window-bg: #F2F2F2;
+            --header-bg: #2C2C2C; 
+            --selection: #E8F2FD;
+            --sidebar-bg: #F6F6F6;
         }
 
-        body.light-mode {
-            /* Light Theme */
-            --bg-color: #f5f5f7;
-            --card-bg-color: #ffffff;
-            --primary-color: #1d1d1f;
-            --secondary-color: #515154;
-            --border-color: rgba(0, 0, 0, 0.1);
-            --accent-color: #007aff;
-            --timeline-color: #007aff;
-            --header-bg: rgba(245, 245, 247, 0.7);
-        }
-
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--primary-color);
-            font-family: var(--font-family);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-family: 'Ubuntu', sans-serif;
+            background: url('https://i0.wp.com/www.omgubuntu.co.uk/wp-content/uploads/2024/09/ubuntu-2410-wallpaper.jpg?ssl=1') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            overflow: hidden;
+            user-select: none;
+            transition: background 0.5s ease;
         }
 
-        /* --- Header & Navigation --- */
-        .main-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 100;
-            padding: 1rem 5%;
-            background: var(--header-bg);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-color);
-            animation: fadeInDown 1s ease-out;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+        /* --- Top Bar --- */
+        .top-bar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 27px;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 10px; color: white; font-size: 0.85rem; z-index: 2000;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+        /* --- Dock --- */
+        .dock {
+            position: fixed; top: 27px; left: 0; bottom: 0; width: 60px;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex; flex-direction: column; align-items: center;
+            padding-top: 10px; z-index: 1900;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+        .dock-item {
+            width: 45px; height: 45px; margin-bottom: 10px;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 5px; transition: all 0.2s; cursor: pointer; position: relative;
         }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 1rem;
-        }
+        .dock-item:hover { background-color: rgba(255, 255, 255, 0.15); }
+        .dock-item i { font-size: 26px; }
+        .dock-item img { width: 32px; height: 32px; object-fit: contain; }
 
-        .nav-links a {
-            position: relative;
-            color: var(--secondary-color);
-            text-decoration: none;
-            font-weight: 500;
-            padding: 9px 15px;
-            border-radius: 999px;
-            z-index: 1;
-            transition: color 0.3s ease-in-out;
-        }
+        .app-grid-btn { margin-top: auto; margin-bottom: 15px; color: white; }
 
-        .nav-links a::before {
-            content: '';
-            position: absolute;
-            z-index: -1;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--accent-color);
-            border-radius: 999px;
-            transform: scaleX(0);
-            transform-origin: center;
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-        }
-
-        .nav-links a:hover::before {
-            transform: scaleX(1);
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        #theme-toggle {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--secondary-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1rem;
-            transition: color 0.3s, background-color 0.3s, border-color 0.3s, transform 0.3s;
-        }
-
-        #theme-toggle:hover {
-            color: var(--primary-color);
-            background-color: var(--border-color);
-            transform: rotate(180deg);
+        .dock-dot {
+            position: absolute; left: -2px; top: 50%; transform: translateY(-50%);
+            width: 4px; height: 4px; background: var(--ubuntu-orange);
+            border-radius: 50%; display: none;
         }
         
-        /* --- Language Selector --- */
-        .language-selector {
-            position: relative;
-            display: inline-block;
+        /* --- Desktop Icons --- */
+        .desktop-icons-container {
+            position: absolute; top: 30px; left: 70px; display: flex; flex-direction: column; gap: 20px;
         }
-
-        .language-button {
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--secondary-color);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-family: var(--font-family);
-            font-weight: 500;
-            transition: all 0.3s ease;
+        .desktop-icon {
+            width: 90px; text-align: center; color: white; cursor: pointer;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.8); padding: 5px; border-radius: 5px;
+            transition: background 0.2s;
         }
+        .desktop-icon:hover { background: rgba(255,255,255,0.2); }
+        .desktop-icon i { font-size: 38px; margin-bottom: 8px; display: block; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        .desktop-icon span { font-size: 0.9rem; line-height: 1.2; font-weight: 400; }
 
-        .language-button:hover,
-        .language-selector:hover .language-button {
-            background-color: var(--border-color);
-            color: var(--primary-color);
+        /* --- App Grid Overlay --- */
+        .app-grid-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); z-index: 1800; display: none;
+            flex-direction: column; align-items: center; justify-content: center;
+            animation: fadeIn 0.2s;
         }
+        .app-search {
+            width: 400px; padding: 10px 20px; border-radius: 25px; border: 1px solid #555;
+            background: #222; color: white; font-size: 1rem; margin-bottom: 40px; text-align: center;
+        }
+        .all-apps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 30px; text-align: center; }
+        .app-card { color: white; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 10px; width: 100px; }
+        .app-card:hover .app-icon-bg { background: rgba(255,255,255,0.2); }
+        .app-icon-bg { width: 60px; height: 60px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 30px; background: rgba(255,255,255,0.1); transition: 0.2s;}
 
-        .language-dropdown {
-            display: none;
+        /* --- Window System --- */
+        .window {
             position: absolute;
-            top: 120%;
-            right: 0;
-            background-color: var(--card-bg-color);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            overflow: hidden;
-            padding: 0.5rem 0;
-        }
-
-        .language-selector:hover .language-dropdown {
-            display: block;
-        }
-
-        .language-dropdown a {
-            color: var(--secondary-color);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        .language-dropdown a:hover {
-            background-color: var(--accent-color);
-            color: #fff;
-        }
-
-
-        /* --- General Section Styling --- */
-        section {
-            padding: 6rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 4rem;
-            position: relative;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--accent-color);
-        }
-
-        /* --- Hero Section --- */
-        .hero-section {
-            min-height: 100vh;
-            display: flex;
-            max-width: none;
-            padding-left: 0;
-            padding-right: 0;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @keyframes animated-gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .hero-background {
-            position: absolute;
-            top: -10%; left: -10%;
-            width: 120%; height: 120%;
-            z-index: 0;
-            background: radial-gradient(circle at 20% 25%, rgba(0, 124, 240, 0.4), transparent 30%),
-                        radial-gradient(circle at 80% 30%, rgba(255, 0, 255, 0.3), transparent 35%),
-                        radial-gradient(circle at 50% 80%, rgba(0, 255, 255, 0.4), transparent 40%);
-            background-size: 200% 200%;
-            animation: animated-gradient 25s ease infinite;
-            filter: blur(100px);
-        }
-
-        .hero-content { position: relative; z-index: 1; max-width: 800px; }
-        .hero-title { font-size: 4rem; font-weight: 700; line-height: 1.1; margin-bottom: 1rem; }
-        .hero-subtitle { font-size: 1.25rem; color: var(--secondary-color); margin-bottom: 2rem; }
-
-        .cta-button {
-            display: inline-block;
-            background: var(--accent-color);
-            color: #fff;
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 124, 240, 0.3);
-        }
-
-        /* --- Experience Section --- */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .timeline::after {
-            content: '';
-            position: absolute;
-            width: 3px;
-            background-color: var(--timeline-color);
-            top: 0;
-            bottom: 0;
-            left: 50%;
-            margin-left: -1.5px;
-            opacity: 0.3;
-        }
-
-        .timeline-item {
-            padding: 10px 40px;
-            position: relative;
-            width: 50%;
-        }
-
-        .timeline-item:nth-child(odd) { left: 0; }
-        .timeline-item:nth-child(even) { left: 50%; }
-
-        .timeline-item::after {
-            content: '';
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            right: -10px;
-            background-color: var(--bg-color);
-            border: 3px solid var(--timeline-color);
-            top: 25px;
-            border-radius: 50%;
-            z-index: 1;
-            transition: background-color 0.3s ease;
-        }
-
-        .timeline-item:nth-child(even)::after { left: -10px; }
-
-        .timeline-content {
-            padding: 20px 30px;
-            background: var(--card-bg-color);
-            border: 1px solid var(--border-color);
-            position: relative;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
-        }
-
-        .job-title { font-size: 1.5rem; margin-bottom: 0.25rem; }
-        .job-details { color: var(--secondary-color); margin-bottom: 1rem; font-style: italic; }
-        .timeline-content ul { list-style-position: inside; padding-left: 0; }
-        .timeline-content ul li { margin-bottom: 0.5rem; color: var(--secondary-color); }
-
-        /* --- Projects Section --- */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--card-bg-color);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.4s ease;
-            display: flex;
+            background-color: var(--window-bg);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            display: none; 
             flex-direction: column;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.3);
+            width: 900px; height: 600px; top: 80px; left: 120px;
+            transition: transform 0.2s, opacity 0.2s;
         }
-        .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); }
-        .project-image { height: 200px; background-size: cover; background-position: center; transition: transform 0.4s ease; }
-        .project-card:hover .project-image { transform: scale(1.05); }
-        .project-content { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
-        .project-title { font-size: 1.5rem; margin-bottom: 0.5rem; }
-        .project-description { color: var(--secondary-color); margin-bottom: 1rem; flex-grow: 1; }
-        .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
-        .project-tags span { background: var(--border-color); padding: 0.3rem 0.7rem; border-radius: 15px; font-size: 0.8rem; }
-        .project-link { color: var(--accent-color); text-decoration: none; font-weight: 500; align-self: flex-start; }
-        .project-link i { margin-left: 0.5rem; transition: transform 0.3s ease; }
-        .project-link:hover i { transform: translateX(5px); }
+        
+        .window.visible { display: flex; animation: popIn 0.2s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .window.maximized { top: 27px !important; left: 60px !important; width: calc(100% - 60px) !important; height: calc(100% - 27px) !important; border-radius: 0; }
+        .window.minimized { transform: scale(0.7) translateY(500px); opacity: 0; pointer-events: none; }
 
-        /* --- About Section --- */
-        .about-content { display: flex; align-items: flex-start; gap: 3rem; }
-        .about-image { width: 250px; height: 250px; flex-shrink: 0; }
-        .about-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; border: 3px solid var(--border-color); box-shadow: 0 0 20px rgba(0,0,0,0.1); }
-        .about-text h3 { font-size: 2rem; margin-bottom: 1rem; }
-        .about-text p { color: var(--secondary-color); margin-bottom: 1rem; max-width: 700px; }
-        .skill-category { margin-top: 1.5rem; }
-        .skill-category h4 { font-size: 1.2rem; margin-bottom: 1rem; color: var(--primary-color); border-left: 3px solid var(--accent-color); padding-left: 10px;}
-        .skills-list { display: flex; flex-wrap: wrap; gap: 0.7rem; }
-        .skills-list span { background: var(--border-color); padding: 0.5rem 1rem; border-radius: 8px; font-weight: 500; transition: all 0.3s ease; }
-        .skills-list span:hover { background-color: var(--accent-color); color: #fff; border-color: var(--accent-color); }
+        .window-header {
+            background: #EAEAEA; border-bottom: 1px solid #D6D6D6; height: 38px;
+            display: flex; align-items: center; justify-content: center; position: relative; user-select: none;
+        }
+        .window-title { font-weight: 700; color: #555; font-size: 0.95rem; }
+        .window-controls { position: absolute; right: 12px; display: flex; gap: 8px; }
+        .control-btn {
+            width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 10px; cursor: pointer; color: #555; background: #D6D6D6; transition: background 0.2s;
+        }
+        .close-btn:hover { background: #E95420; color: white; }
+        .window-content { flex: 1; overflow: hidden; position: relative; display: flex; }
 
-        /* --- Contact & Footer --- */
-        .contact-section { text-align: center; }
-        .contact-section p { font-size: 1.1rem; color: var(--secondary-color); max-width: 600px; margin: 0 auto 2rem auto; }
-        .main-footer-bottom { padding: 2rem 5%; text-align: center; border-top: 1px solid var(--border-color); }
-        .social-links { margin-bottom: 1rem; }
-        .social-links a { color: var(--secondary-color); font-size: 1.5rem; margin: 0 1rem; transition: color 0.3s, transform 0.3s; }
-        .social-links a:hover { color: var(--accent-color); transform: translateY(-3px); }
-        .main-footer-bottom p { color: var(--secondary-color); font-size: 0.9rem; }
+        /* --- APP SPECIFIC STYLES --- */
+        
+        /* 1. File Manager (Improved) */
+        .fm-container { display: flex; width: 100%; height: 100%; }
+        .fm-sidebar { 
+            width: 200px; 
+            background: var(--sidebar-bg); 
+            border-right: 1px solid #e0e0e0; 
+            display: flex; 
+            flex-direction: column; 
+            padding: 10px; 
+        }
+        .fm-sidebar-item {
+            padding: 8px 12px;
+            margin-bottom: 2px;
+            border-radius: 4px;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .fm-sidebar-item:hover { background: #E6E6E6; }
+        .fm-sidebar-item.active { background: #E0E0E0; color: #E95420; font-weight: 500; }
+        
+        .fm-main-area { flex: 1; background: white; display: flex; flex-direction: column; }
+        
+        .fm-breadcrumb-bar {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #666;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+        .fm-breadcrumb-active { font-weight: bold; color: #333; }
 
-        /* --- Animations & Responsive --- */
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .fm-grid { 
+            padding: 20px; 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+            gap: 15px; 
+            overflow-y: auto; 
+        }
+        .fm-file {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 10px 5px; border-radius: 4px; cursor: pointer; text-align: center;
+            transition: background 0.1s;
+        }
+        .fm-file:hover { background: #F0F0F0; }
+        .fm-file.selected { background: #E8F2FD; }
+        
+        .fm-file-icon { 
+            width: 64px; height: 64px; 
+            object-fit: cover; 
+            margin-bottom: 8px; 
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .fm-file-icon.folder { object-fit: contain; box-shadow: none; }
+        .fm-file-name { font-size: 0.85rem; color: #333; word-break: break-word; line-height: 1.3;}
 
+        /* 2. PDF Reader */
+        .pdf-content { width: 100%; height: 100%; background: #525659; display: flex; justify-content: center; }
+        .pdf-frame { width: 100%; height: 100%; border: none; }
+
+        /* 3. Terminal */
+        .terminal-window .window-header { background: #3e3e3e; border: none; }
+        .terminal-window .window-title { color: #ccc; }
+        .terminal-content { background: #300A24; color: white; font-family: 'Ubuntu Mono', monospace; padding: 15px; height: 100%;}
+        .prompt { color: #8AE234; } .path { color: #729FCF; }
+
+        /* 4. VS Code */
+        .vscode-window .window-header { background: #1e1e1e; border-bottom: 1px solid #333; }
+        .vscode-window .window-title { color: #ccc; }
+        .vscode-body { display: flex; height: 100%; background: #1e1e1e; color: #d4d4d4; font-family: 'Ubuntu Mono', monospace; }
+        .vscode-sidebar { width: 50px; background: #333; display: flex; flex-direction: column; align-items: center; padding-top: 10px; gap: 15px; }
+        .vscode-sidebar i { font-size: 24px; color: #858585; cursor: pointer; }
+        .vscode-sidebar i.active { color: white; border-left: 2px solid white; padding-left: 8px; margin-left: -10px;}
+        .vscode-files { width: 180px; background: #252526; padding: 10px; font-size: 0.9rem; }
+        .vscode-editor { flex: 1; background: #1e1e1e; padding: 10px 20px; overflow-y: auto; }
+        .code-line { line-height: 1.5; }
+        .keyword { color: #c586c0; } .string { color: #ce9178; } .function { color: #dcdcaa; } .comment { color: #6a9955; }
+
+        /* 5. Settings */
+        .settings-content { padding: 20px; display: grid; grid-template-columns: 1fr 2fr; gap: 20px; height: 100%; overflow:hidden; }
+        .settings-sidebar { background: white; border-radius: 8px; padding: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .settings-main { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); overflow-y: auto; }
+        .wallpaper-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 15px; margin-top: 20px; }
+        .wallpaper-option { height: 80px; background-size: cover; border-radius: 5px; cursor: pointer; border: 2px solid transparent; }
+        .wallpaper-option:hover { transform: scale(1.05); }
+        .wallpaper-option.selected { border-color: var(--ubuntu-orange); }
+
+        /* 6. Calculator */
+        .calc-body { display: flex; flex-direction: column; height: 100%; padding: 10px; background: #f3f3f3; }
+        .calc-display { background: white; border: 1px solid #ccc; height: 60px; margin-bottom: 10px; text-align: right; padding: 10px; font-size: 2rem; border-radius: 5px; }
+        .calc-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; flex: 1; }
+        .calc-btn { border: 1px solid #ccc; background: white; font-size: 1.2rem; cursor: pointer; border-radius: 5px; }
+        .calc-btn:hover { background: #e0e0e0; }
+        .calc-btn.orange { background: var(--ubuntu-orange); color: white; border: none; }
+        
+        @keyframes fadeIn { from { opacity: 0; transform: scale(1.1); } to { opacity: 1; transform: scale(1); } }
+        @keyframes popIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+        /* Context Menu */
+        .context-menu {
+            position: absolute; width: 200px; background: #333; color: white;
+            border-radius: 5px; padding: 5px 0; display: none; z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5); font-size: 0.9rem;
+        }
+        .context-item { padding: 8px 15px; cursor: pointer; display: flex; justify-content: space-between; }
+        .context-item:hover { background: var(--ubuntu-orange); }
+        .context-separator { height: 1px; background: #555; margin: 5px 0; }
+
+        /* Mobile */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .hero-title { font-size: 2.8rem; }
-            .about-content { flex-direction: column; text-align: center; align-items: center; }
-            .skill-category h4 { text-align: left; }
-            .timeline::after { left: 31px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
-            .timeline-item:nth-child(even) { left: 0%; }
-            .timeline-item::after { left: 21px; }
+            .dock { width: 100%; height: 50px; bottom: 0; top: auto; flex-direction: row; justify-content: space-evenly; }
+            .window { top: 30px !important; left: 0 !important; width: 100% !important; height: calc(100% - 50px) !important; border-radius: 0; }
+            .desktop-icons-container { display: none; }
+            .app-grid-btn { margin-bottom: 0; }
+            .fm-sidebar { width: 60px; }
+            .fm-sidebar-item span { display: none; }
+            .fm-sidebar-item { justify-content: center; }
         }
+
     </style>
 </head>
-
 <body>
-    <header class="main-header">
-        <nav class="main-nav">
-            <div class="logo">Htet Aung</div>
-            <ul class="nav-links">
-                <li><a href="#hero">Home</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#demos">Demos</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="nav-controls">
-                 <div class="language-selector">
-                    <button class="language-button"><i class="fas fa-globe"></i> EN</button>
-                    <div class="language-dropdown">
-                        <a href="index.html">English</a>
-                        <a href="ch.html">中文 (Chinese)</a>
-                        <a href="jp.html">日本語 (Japanese)</a>
-                        <a href="es.html">Español (Spanish)</a>
-                        <a href="vi.html">Tiếng Việt (Vietnamese)</a>
-                    </div>
-                 </div>
-                 <button id="theme-toggle" title="Toggle theme">
-                    <i class="fas fa-sun"></i>
-                </button>
-            </div>
-        </nav>
-    </header>
 
-    <main>
-        <section id="hero" class="hero-section">
-            <div class="hero-background"></div>
-            <div class="hero-content">
-                <h1 class="hero-title">Welcome to my portfolio! </h1>
-                <p class="hero-subtitle">A showcase of my projects and skills</p>
-                <a href="#projects" class="cta-button">View My Work</a>
-            </div>
-        </section>
-
-        <section id="experience" class="experience-section">
-            <h2 class="section-title">Experience</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3 class="job-title">Full Stack Developer and Co-Founder</h3>
-                        <p class="job-details">2024</p>
-                        <ul>
-                            <li>Led the design, development, and maintenance of the company's website.</li>
-                            <li>Implemented SEO strategies to improve search engine ranking and increase organic traffic.</li>
-                            <li>Managed website content and collaborated with the wider development team.</li>
-                            <li>Contributed to marketing efforts and logo design.</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <h3 class="job-title">Freelance System Administrator</h3>
-                        <p class="job-details">Upwork</p>
-                        <ul>
-                            <li>Administered and maintained Linux-based servers (Ubuntu, Debian, Fedora).</li>
-                            <li>Provided technical support and troubleshooting for OS-related issues on Windows, macOS, and Linux.</li>
-                            <li>Implemented Bash scripts for automation and to streamline system administration tasks.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="projects" class="projects-section">
-            <h2 class="section-title">Featured Projects</h2>
-             <div class="projects-grid">
-                 <div class="project-card">
-                     <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true');"></div>
-                     <div class="project-content">
-                         <h3 class="project-title">PLATE.AI</h3>
-                         <p class="project-description">A comprehensive, full-stack web application for real-time, high-accuracy detection and recognition of Vietnamese license plates.</p>
-                         <div class="project-tags">
-                             <span>React Js</span>
-                             <span>Python</span>
-                             <span>HTML/CSS</span>
-                         </div>
-                         <a href="https://github.com/Htet-2aung/PLATE.AI" target="_blank" class="project-link">View on GitHub <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-                 <div class="project-card">
-                     <div class="project-image" style="background-image: url('https://cdn.macstories.net/cleanshot-2021-07-01-at-08-08-26-2x-1625144924133.jpg');"></div>
-                     <div class="project-content">
-                         <h3 class="project-title">Hackintosh Monterey</h3>
-                         <p class="project-description">A guide and EFI configuration for running macOS Monterey on non-Apple hardware (Intel i3-6100U).</p>
-                          <div class="project-tags">
-                             <span>macOS</span>
-                             <span>OpenCore</span>
-                             <span>Intel</span>
-                         </div>
-                         <a href="https://github.com/Htet-2aung/Hackintosh-Monterey-on-Dell-Inspiron-3580" target="_blank" class="project-link">Read More <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-                 <div class="project-card">
-                     <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/Car-Plate-Number-Recognition-App/raw/main/Screenshot_11-5-2025_23144_localhost.jpeg');"></div>
-                     <div class="project-content">
-                         <h3 class="project-title">Car License Plate & Model Detection</h3>
-                         <p class="project-description">A web app for detecting car plate numbers using advanced image processing and computer vision techniques.</p>
-                          <div class="project-tags">
-                             <span>Python</span>
-                             <span>Scikit-learn</span>
-                             <span>YOLOv5</span>
-                              <span>Node Js</span>
-                         </div>
-                         <a href="https://github.com/Htet-2aung/Car-Plate-Number-Recognition-App" target="_blank" class="project-link">View on Github<i class="fas fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-                  <div class="project-card">
-                     <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1618401479427-c8ef9465fbe1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8Z2l0aHVifGVufDB8fDB8fHww');"></div>
-                     <div class="project-content">
-                         <h3 class="project-title">Explore More</h3>
-                         <p class="project-description">Visit my GitHub to see the full range of my projects, experiments, and contributions.</p>
-                          <div class="project-tags">
-                             <span>All Projects</span>
-                         </div>
-                         <a href="https://github.com/Htet-2aung" target="_blank" class="project-link">Visit GitHub <i class="fas fa-arrow-right"></i></a>
-                     </div>
-                 </div>
-             </div>
-        </section>
-
-        <!-- ============================================= -->
-        <!-- ========= NEW INTERACTIVE DEMOS SECTION ========= -->
-        <!-- ============================================= -->
-        <section id="demos" class="projects-section">
-    <h2 class="section-title">Interactive Demos</h2>
-    <div class="projects-grid">
-        <div class="project-card">
-            <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/Podcasty/raw/main/assets/demo2.png?raw=true');"></div>
-            <div class="project-content">
-                <h3 class="project-title">Podcasty</h3>
-                <p class="project-description">A web application for listening to your favorite podcasts, deployed on Vercel.</p>
-                <div class="project-tags">
-                    <span>Typescript</span>
-                    <span>PWA</span>
-                    <span>Node.js</span>
-                </div>
-                <a href="project-details.html?project=podcasty" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
+    <div class="top-bar">
+        <div class="top-left" style="font-weight: 500;">Activities</div>
+        <div class="top-center" id="clock">Oct 24 12:00</div>
+        <div class="top-right">
+            <i class="fas fa-wifi"></i>&nbsp;&nbsp;
+            <i class="fas fa-volume-up"></i>&nbsp;&nbsp;
+            <i class="fas fa-power-off"></i>
         </div>
-        <div class="project-card">
-            <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true');"></div>
-            <div class="project-content">
-                <h3 class="project-title">PLATE.AI</h3>
-                <p class="project-description">A full-stack web app for real-time, high-accuracy detection of Vietnamese license plates.</p>
-                <div class="project-tags">
-                    <span>React JS</span>
-                    <span>Machine Learning</span>
-                    <span>Deep Learning & Computer Vision</span>
-                    <span>Python</span>
-                </div>
-                <a href="project-details.html?project=plate-ai" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
-            </div>
+    </div>
+
+    <div class="desktop-icons-container">
+        <div class="desktop-icon" ondblclick="toggleWindow('win-files')">
+            <i class="fas fa-folder" style="color: #E95420;"></i>
+            <span>Home</span>
         </div>
-        <div class="project-card">
-            <div class="project-image" style="background-image: url('https://github.com/Htet-2aung/Cryptography-Playground/raw/main/screenshot.png');"></div>
-            <div class="project-content">
-                <h3 class="project-title">Cryptography Playground</h3>
-                <p class="project-description">An interactive playground to explore and learn about cryptographic algorithms, deployed on Vercel.</p>
-                <div class="project-tags">
-                    <span>Cyber Security</span>
-                    <span>JavaScript</span>
-                    <span>React</span>
-                </div>
-                <a href="project-details.html?project=cryptography-playground" class="project-link">Learn More <i class="fas fa-arrow-right"></i></a>
+        <div class="desktop-icon" ondblclick="toggleWindow('win-terminal')">
+            <i class="fas fa-terminal" style="color: #ddd;"></i>
+            <span>Terminal</span>
+        </div>
+        <div class="desktop-icon" ondblclick="toggleWindow('win-resume')">
+            <i class="fas fa-file-pdf" style="color: #b30b00;"></i>
+            <span>Resume.pdf</span>
+        </div>
+        <div class="desktop-icon" onclick="window.open('https://github.com/Htet-2aung', '_blank')">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+        </div>
+    </div>
+
+    <div class="dock" id="dock-container"></div>
+
+    <div class="app-grid-overlay" id="app-grid" onclick="toggleAppGrid()">
+        <input type="text" class="app-search" placeholder="Type to search..." onclick="event.stopPropagation()">
+        <div class="all-apps">
+            <div class="app-card" onclick="toggleWindow('win-calc')">
+                <div class="app-icon-bg" style="background: #E95420;"><i class="fas fa-calculator"></i></div>
+                <span>Calculator</span>
+            </div>
+            <div class="app-card" onclick="toggleWindow('win-settings')">
+                <div class="app-icon-bg" style="background: #333;"><i class="fas fa-cog"></i></div>
+                <span>Settings</span>
+            </div>
+            <div class="app-card" onclick="toggleWindow('win-vscode')">
+                <div class="app-icon-bg" style="background: #007acc;"><i class="fas fa-code"></i></div>
+                <span>VS Code</span>
+            </div>
+            <div class="app-card" onclick="toggleWindow('win-browser')">
+                <div class="app-icon-bg" style="background: #e66000;"><i class="fab fa-firefox-browser"></i></div>
+                <span>Firefox</span>
+            </div>
+            <div class="app-card" onclick="toggleWindow('win-podcasty')">
+                <div class="app-icon-bg" style="background: #A020F0;"><i class="fas fa-podcast"></i></div>
+                <span>Podcasty</span>
+            </div>
+            <div class="app-card" onclick="toggleWindow('win-resume')">
+                <div class="app-icon-bg" style="background: #b30b00;"><i class="fas fa-file-pdf"></i></div>
+                <span>Resume</span>
             </div>
         </div>
     </div>
-</section>
 
-
-        <section id="about" class="about-section">
-             <h2 class="section-title">About Me</h2>
-             <div class="about-content">
-                <div class="about-image">
-                     <img src="https://avatars.githubusercontent.com/u/171558366?v=4" alt="Htet Aung">
+    <div class="window" id="win-files">
+        <div class="window-header drag-handler">
+            <span class="window-title">Files</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-files')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-files')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-files')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="fm-container">
+            <div class="fm-sidebar">
+                <div class="fm-sidebar-item"><i class="fas fa-clock" style="color: #666;"></i> <span>Recent</span></div>
+                <div class="fm-sidebar-item"><i class="fas fa-star" style="color: #666;"></i> <span>Starred</span></div>
+                <div class="fm-sidebar-item active"><i class="fas fa-home"></i> <span>Home</span></div>
+                <div class="fm-sidebar-item"><i class="fas fa-desktop"></i> <span>Desktop</span></div>
+                <div class="fm-sidebar-item"><i class="fas fa-file-alt"></i> <span>Documents</span></div>
+                <div class="fm-sidebar-item"><i class="fas fa-download"></i> <span>Downloads</span></div>
+                <div style="margin-top: auto;">
+                    <div class="fm-sidebar-item"><i class="fas fa-trash-alt"></i> <span>Trash</span></div>
                 </div>
-                <div class="about-text">
-                    <h3>Hello, I'm Htet Aung.</h3>
-                    <p>I am a highly motivated, all-rounder final-year Computer Science student at Ton Duc Thang University, where I was awarded a 100% fully funded scholarship. My journey in tech is driven by a passion for building elegant, efficient software and a deep interest in machine learning.</p>
-                     
-                    <div class="skills-container">
-                        <div class="skill-category">
-                            <h4>Programming & Web</h4>
-                            <div class="skills-list">
-                                <span>Python</span><span>Java</span><span>Go</span><span>R</span><span>Rust</span><span>SQL</span><span>PHP</span><span>JavaScript</span><span>React.js</span><span>Node.js</span><span>HTML5</span><span>Tailwind CSS</span>
-                            </div>
-                        </div>
-                         <div class="skill-category">
-                            <h4>Cybersecurity & Networking</h4>
-                             <div class="skills-list">
-                                <span>Nmap</span><span>Hydra</span><span>Wireshark</span><span>Gobuster</span><span>API Testing</span><span>Network Security</span><span>Cisco Fundamentals</span>
-                            </div>
-                        </div>
-                        <div class="skill-category">
-                             <h4>Systems & DevOps</h4>
-                             <div class="skills-list">
-                                <span>Linux (Ubuntu, Debian, Fedora)</span><span>Docker</span><span>Git</span><span>Bash Scripting</span><span>OS Debugging</span>
-                            </div>
-                        </div>
+            </div>
+            <div class="fm-main-area">
+                <div class="fm-breadcrumb-bar">
+                    <i class="fas fa-chevron-left" style="color: #999; margin-right: 5px;"></i>
+                    <i class="fas fa-chevron-right" style="color: #ccc; margin-right: 10px;"></i>
+                    <span>Home</span> <span style="color: #999;">/</span> <span class="fm-breadcrumb-active">Projects</span>
+                </div>
+                <div class="fm-grid">
+                    <div class="fm-file" onclick="toggleWindow('win-podcasty')">
+                        <img src="https://github.com/Htet-2aung/Podcasty/raw/main/assets/demo2.png?raw=true" class="fm-file-icon">
+                        <span class="fm-file-name">Podcasty</span>
+                    </div>
+                    <div class="fm-file" onclick="window.open('https://github.com/Htet-2aung/PLATE.AI','_blank')">
+                        <img src="https://github.com/Htet-2aung/PLATE.AI/blob/main/assets/Captura%20de%20pantalla%202025-06-09%20181711.png?raw=true" class="fm-file-icon">
+                        <span class="fm-file-name">PLATE.AI</span>
+                    </div>
+                    <div class="fm-file" onclick="openBrowser('https://cryptography-playground.vercel.app/', 'Crypto')">
+                        <img src="https://github.com/Htet-2aung/Cryptography-Playground/raw/main/screenshot.png" class="fm-file-icon">
+                        <span class="fm-file-name">Crypto Lab</span>
+                    </div>
+                    <div class="fm-file" onclick="window.open('https://github.com/Htet-2aung/Ollama-Model-Downloader','_blank')">
+                         <div class="fm-file-icon folder" style="background:#333; display:flex; align-items:center; justify-content:center; color:white; font-size:30px;"><i class="fab fa-python"></i></div>
+                        <span class="fm-file-name">Ollama Tools</span>
+                    </div>
+                    <div class="fm-file" onclick="window.open('https://github.com/Htet-2aung/go-proxy-server','_blank')">
+                        <div class="fm-file-icon folder" style="background:#00ADD8; display:flex; align-items:center; justify-content:center; color:white; font-size:30px;"><i class="fab fa-golang"></i></div>
+                        <span class="fm-file-name">Go Proxy</span>
+                    </div>
+                     <div class="fm-file" onclick="toggleWindow('win-resume')">
+                        <div class="fm-file-icon folder" style="background:#b30b00; display:flex; align-items:center; justify-content:center; color:white; font-size:30px;"><i class="fas fa-file-pdf"></i></div>
+                        <span class="fm-file-name">Resume.pdf</span>
                     </div>
                 </div>
-             </div>
-        </section>
-
-        <section id="contact" class="contact-section">
-             <h2 class="section-title">Get In Touch</h2>
-             <p>I'm always open to discussing new projects, creative ideas, or opportunities to be part of an amazing team. Feel free to reach out!</p>
-             <a href="mailto:kienbrowns1129@gmail.com" class="cta-button">Say Hello</a>
-        </section>
-    </main>
-
-    <footer class="main-footer-bottom">
-         <div class="social-links">
-            <a href="https://github.com/Htet-2aung" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://htetaung.me" target="_blank" title="Website"><i class="fas fa-globe"></i></a>
-            <a href="#" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
         </div>
-        <p>&copy; 2025 Htet Aung | All Rights Reserved</p>
-    </footer>
+    </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
-    <script >
-        document.addEventListener("DOMContentLoaded", function () {
-            // --- Theme Toggler ---
-            const themeToggleButton = document.getElementById('theme-toggle');
-            const body = document.body;
-            const themeIcon = themeToggleButton.querySelector('i');
+    <div class="window" id="win-resume" style="width: 800px; height: 700px;">
+        <div class="window-header drag-handler">
+            <span class="window-title">Document Viewer - Resume.pdf</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-resume')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-resume')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-resume')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="pdf-content">
+            <iframe src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" class="pdf-frame"></iframe>
+        </div>
+    </div>
 
-            // Function to apply the theme
-            const applyTheme = (theme) => {
-                body.classList.remove('light-mode', 'dark-mode');
-                body.classList.add(theme);
-                themeIcon.className = theme === 'light-mode' ? 'fas fa-moon' : 'fas fa-sun';
-                localStorage.setItem('theme', theme);
-            };
+    <div class="window" id="win-browser" style="background: white;">
+        <div class="window-header drag-handler">
+            <span class="window-title">Mozilla Firefox</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-browser')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-browser')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-browser')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div style="padding: 8px; border-bottom: 1px solid #ccc; display: flex; gap: 10px;">
+            <i class="fas fa-arrow-left" style="color:#888; cursor:pointer;" onclick="goHome()"></i>
+            <input type="text" id="browser-url" value="https://htetaung.me/about" style="flex:1; padding:5px; border-radius:5px; border:1px solid #ccc;">
+        </div>
+        <div class="window-content">
+            <div id="browser-home" style="padding: 40px; text-align: center;">
+                <img src="https://avatars.githubusercontent.com/u/171558366?v=4" style="width:120px; border-radius:50%; margin-bottom:20px;">
+                <h2>Htet Aung</h2>
+                <p>Welcome to my Ubuntu Portfolio.</p>
+                <p>Use the OS to explore my work.</p>
+            </div>
+            <iframe id="browser-frame" style="width:100%; height:100%; border:none; display:none;"></iframe>
+        </div>
+    </div>
 
-            // Check for saved theme in localStorage
-            const savedTheme = localStorage.getItem('theme') || 'dark-mode';
-            applyTheme(savedTheme);
+    <div class="window vscode-window" id="win-vscode" style="width: 800px; height: 500px;">
+        <div class="window-header drag-handler">
+            <span class="window-title">skills.js - Visual Studio Code</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-vscode')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-vscode')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-vscode')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="vscode-body">
+            <div class="vscode-sidebar">
+                <i class="fas fa-copy active"></i>
+                <i class="fas fa-search"></i>
+                <i class="fas fa-code-branch"></i>
+                <i class="fas fa-extensions"></i>
+            </div>
+            <div class="vscode-files">
+                <p style="margin-bottom:10px; font-weight:bold;">EXPLORER</p>
+                <p><i class="fas fa-chevron-down"></i> PORTFOLIO</p>
+                <p style="margin-left:15px; background:#37373d; color:white;"><i class="fab fa-js" style="color:#f1e05a;"></i> skills.js</p>
+                <p style="margin-left:15px;"><i class="fab fa-html5" style="color:#e34c26;"></i> index.html</p>
+                <p style="margin-left:15px;"><i class="fab fa-css3-alt" style="color:#563d7c;"></i> style.css</p>
+            </div>
+            <div class="vscode-editor">
+                <div class="code-line"><span class="keyword">const</span> <span class="function">developer</span> = {</div>
+                <div class="code-line">&nbsp;&nbsp;name: <span class="string">"Htet Aung"</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;role: <span class="string">"Full Stack Developer"</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;skills: [</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Python"</span>, <span class="string">"Java"</span>, <span class="string">"Go"</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"React.js"</span>, <span class="string">"Node.js"</span>,</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">"Linux Administration"</span></div>
+                <div class="code-line">&nbsp;&nbsp;],</div>
+                <div class="code-line">&nbsp;&nbsp;<span class="comment">// Hard working & Fast learner</span></div>
+                <div class="code-line">&nbsp;&nbsp;<span class="function">contact</span>: <span class="keyword">function</span>() {</div>
+                <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"kienbrowns1129@gmail.com"</span>;</div>
+                <div class="code-line">&nbsp;&nbsp;}</div>
+                <div class="code-line">}</div>
+            </div>
+        </div>
+    </div>
 
-            // Event listener for the toggle button
-            themeToggleButton.addEventListener('click', () => {
-                const newTheme = body.classList.contains('light-mode') ? 'dark-mode' : 'light-mode';
-                applyTheme(newTheme);
+    <div class="window" id="win-settings" style="width: 700px; height: 500px;">
+        <div class="window-header drag-handler">
+            <span class="window-title">Settings</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-settings')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-settings')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-settings')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="settings-content">
+            <div class="settings-sidebar">
+                <p style="padding:10px; background:#efefef; border-radius:5px; font-weight:bold;">Background</p>
+                <p style="padding:10px;">Appearance</p>
+                <p style="padding:10px;">Notifications</p>
+            </div>
+            <div class="settings-main">
+                <h3>Background</h3>
+                <div class="wallpaper-grid">
+                    <div class="wallpaper-option selected" style="background-image: url('https://w.wallhaven.cc/full/wq/wallhaven-wqery6.jpg');" onclick="changeWallpaper(this, 'https://w.wallhaven.cc/full/wq/wallhaven-wqery6.jpg')"></div>
+                    <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');" onclick="changeWallpaper(this, 'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');" onclick="changeWallpaper(this, 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="wallpaper-option" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');" onclick="changeWallpaper(this, 'https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80')"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="window terminal-window" id="win-terminal">
+        <div class="window-header drag-handler">
+            <span class="window-title">htet@ubuntu: ~</span>
+            <div class="window-controls">
+                <div class="control-btn min-btn" onclick="minimizeWindow('win-terminal')"><i class="fas fa-minus"></i></div>
+                <div class="control-btn max-btn" onclick="maximizeWindow('win-terminal')"><i class="far fa-square"></i></div>
+                <div class="control-btn close-btn" onclick="closeWindow('win-terminal')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="terminal-content">
+            <p><span class="prompt">htet@ubuntu</span>:<span class="path">~</span>$ neofetch</p>
+            <pre style="color: #ddd;">
+       _      <span style="color: #E95420; font-weight: bold;">User:</span> Htet Aung
+      (_)     <span style="color: #E95420; font-weight: bold;">OS:</span> Ubuntu Portfolio 24.04
+     - . -    <span style="color: #E95420; font-weight: bold;">Role:</span> Full Stack Developer
+    - ... -   <span style="color: #E95420; font-weight: bold;">Uptime:</span> Always Hiring
+   - . - . -  <span style="color: #E95420; font-weight: bold;">Shell:</span> Zsh
+            </pre>
+            <p><span class="prompt">htet@ubuntu</span>:<span class="path">~</span>$ <span class="cursor">_</span></p>
+        </div>
+    </div>
+
+    <div class="window" id="win-calc" style="width: 300px; height: 400px; background: #e0e0e0;">
+        <div class="window-header drag-handler">
+            <span class="window-title">Calculator</span>
+            <div class="window-controls">
+                <div class="control-btn close-btn" onclick="closeWindow('win-calc')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="calc-body">
+            <input class="calc-display" id="calc-display" readonly value="0">
+            <div class="calc-grid">
+                <button class="calc-btn" onclick="calcInput('C')">C</button>
+                <button class="calc-btn" onclick="calcInput('/')">/</button>
+                <button class="calc-btn" onclick="calcInput('*')">*</button>
+                <button class="calc-btn" onclick="calcInput('-')">-</button>
+                <button class="calc-btn" onclick="calcInput('7')">7</button>
+                <button class="calc-btn" onclick="calcInput('8')">8</button>
+                <button class="calc-btn" onclick="calcInput('9')">9</button>
+                <button class="calc-btn" onclick="calcInput('+')" rowspan="2">+</button>
+                <button class="calc-btn" onclick="calcInput('4')">4</button>
+                <button class="calc-btn" onclick="calcInput('5')">5</button>
+                <button class="calc-btn" onclick="calcInput('6')">6</button>
+                <button class="calc-btn" onclick="calcInput('=')">=</button>
+                <button class="calc-btn" onclick="calcInput('1')">1</button>
+                <button class="calc-btn" onclick="calcInput('2')">2</button>
+                <button class="calc-btn" onclick="calcInput('3')">3</button>
+                <button class="calc-btn orange" onclick="calcInput('0')">0</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="window" id="win-podcasty" style="width: 400px; height: 500px; background: #121212;">
+        <div class="window-header drag-handler" style="background: #191414; border-bottom: none;">
+            <span class="window-title" style="color: white;">Podcasty</span>
+            <div class="window-controls">
+                <div class="control-btn close-btn" onclick="closeWindow('win-podcasty')"><i class="fas fa-times"></i></div>
+            </div>
+        </div>
+        <div class="window-content">
+            <iframe src="https://podcasty-two.vercel.app" width="100%" height="100%" frameBorder="0"></iframe>
+        </div>
+    </div>
+
+    <div class="context-menu" id="context-menu">
+        <div class="context-item" onclick="alert('Folder created!')"><span>New Folder</span></div>
+        <div class="context-separator"></div>
+        <div class="context-item" onclick="toggleWindow('win-settings')"><span>Change Background...</span></div>
+        <div class="context-item" onclick="toggleWindow('win-settings')"><span>Display Settings</span></div>
+        <div class="context-separator"></div>
+        <div class="context-item" onclick="toggleWindow('win-terminal')"><span>Open in Terminal</span></div>
+    </div>
+
+    <script>
+
+        /* ==============================================================
+           ================== DOCK CONFIGURATION (PRESERVED) ============
+           ============================================================== */
+        const dockConfig = [
+            { id: 'win-files', icon: 'fas fa-folder', color: '#E95420', label: 'Files' },
+            { id: 'win-browser', img: '/firefox.png', color: '#e66000', label: 'Firefox' },
+            { id: 'win-vscode', img: '/code-white-removebg-preview.png', color: '#007acc', label: 'VS Code' },
+            { id: 'win-terminal', img: 'terminalubunt-removebg-preview.png', color: '#ddd', label: 'Terminal' },
+            { id: 'win-podcasty', img: 'pwa-512x512-removebg-preview.png', color: '#A020F0', label: 'Podcasty' },
+            { id: 'win-settings', icon: 'fas fa-cog', color: '#aaa', label: 'Settings' }
+        ];
+
+        // --- Render Dock Function ---
+        function renderDock() {
+            const dockContainer = document.getElementById('dock-container');
+            dockContainer.innerHTML = ''; // Clear existing
+
+            dockConfig.forEach(app => {
+                const item = document.createElement('div');
+                item.className = 'dock-item';
+                item.title = app.label;
+                item.onclick = () => toggleWindow(app.id);
+
+                if (app.img) {
+                    const img = document.createElement('img');
+                    img.src = app.img;
+                    item.appendChild(img);
+                } else {
+                    const i = document.createElement('i');
+                    i.className = app.icon;
+                    i.style.color = app.color;
+                    item.appendChild(i);
+                }
+
+                const dot = document.createElement('div');
+                dot.className = 'dock-dot';
+                dot.id = 'dot-' + app.id;
+                item.appendChild(dot);
+
+                dockContainer.appendChild(item);
             });
 
-            // --- Smooth Scrolling for Navigation ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const targetElement = document.querySelector(this.getAttribute('href'));
-                    if(targetElement) {
-                        targetElement.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
+            const gridBtn = document.createElement('div');
+            gridBtn.className = 'dock-item app-grid-btn';
+            gridBtn.onclick = toggleAppGrid;
+            gridBtn.innerHTML = '<i class="fas fa-th"></i>';
+            dockContainer.appendChild(gridBtn);
+        }
 
-            // --- Section Fade-in on Scroll ---
-            const sections = document.querySelectorAll('section');
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.1
-            };
+        renderDock();
 
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.animationPlayState = 'running';
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
+        // --- Clock ---
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+        }, 1000);
 
-            sections.forEach(section => {
-                section.style.animationPlayState = 'paused';
-                observer.observe(section);
-            });
+        // --- Window System ---
+        let highestZ = 100;
+        
+        function toggleWindow(id) {
+            const win = document.getElementById(id);
+            const dot = document.getElementById('dot-' + id);
             
-            // --- Vanilla Tilt for Project Cards ---
-            if (typeof VanillaTilt !== 'undefined') {
-                VanillaTilt.init(document.querySelectorAll(".project-card"), {
-                    max: 5,
-                    speed: 400,
-                    glare: true,
-                    "max-glare": 0.2
-                });
+            document.getElementById('app-grid').style.display = 'none';
+
+            if (!win.classList.contains('visible') || win.classList.contains('minimized')) {
+                openWindow(id);
+            } else if (win.style.zIndex == highestZ) {
+                minimizeWindow(id);
+            } else {
+                bringToFront(win);
             }
+        }
+
+        function openWindow(id) {
+            const win = document.getElementById(id);
+            const dot = document.getElementById('dot-' + id);
+            win.classList.remove('minimized');
+            win.classList.add('visible');
+            win.style.display = 'flex';
+            if(dot) dot.style.display = 'block';
+            bringToFront(win);
+        }
+
+        function closeWindow(id) {
+            const win = document.getElementById(id);
+            const dot = document.getElementById('dot-' + id);
+            win.classList.remove('visible');
+            setTimeout(() => win.style.display = 'none', 200);
+            if(dot) dot.style.display = 'none';
+            
+            // Stop iframe video/audio when closed
+            const iframe = win.querySelector('iframe');
+            if (iframe) {
+                const src = iframe.src;
+                iframe.src = src; 
+            }
+        }
+
+        function minimizeWindow(id) {
+            document.getElementById(id).classList.add('minimized');
+        }
+
+        function maximizeWindow(id) {
+            document.getElementById(id).classList.toggle('maximized');
+        }
+
+        function bringToFront(win) {
+            highestZ++;
+            win.style.zIndex = highestZ;
+        }
+
+        // --- Draggable ---
+        document.querySelectorAll('.window').forEach(win => {
+            const header = win.querySelector('.drag-handler');
+            let isDragging = false, offset = [0,0];
+
+            win.addEventListener('mousedown', () => bringToFront(win));
+            
+            header.addEventListener('mousedown', (e) => {
+                if(win.classList.contains('maximized')) return;
+                isDragging = true;
+                offset = [win.offsetLeft - e.clientX, win.offsetTop - e.clientY];
+                header.style.cursor = 'grabbing';
+            });
+
+            document.addEventListener('mouseup', () => { isDragging = false; header.style.cursor = 'default'; });
+            
+            document.addEventListener('mousemove', (e) => {
+                if(isDragging) {
+                    win.style.left = (e.clientX + offset[0]) + 'px';
+                    win.style.top = (e.clientY + offset[1]) + 'px';
+                }
+            });
         });
+
+        // --- App Grid ---
+        function toggleAppGrid() {
+            const grid = document.getElementById('app-grid');
+            grid.style.display = grid.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        // --- Browser Logic ---
+        function openBrowser(url, title) {
+            toggleWindow('win-browser');
+            document.getElementById('browser-url').value = url;
+            document.getElementById('browser-home').style.display = 'none';
+            const frame = document.getElementById('browser-frame');
+            frame.style.display = 'block';
+            frame.src = url;
+        }
+        
+        function goHome() {
+            document.getElementById('browser-home').style.display = 'block';
+            document.getElementById('browser-frame').style.display = 'none';
+            document.getElementById('browser-url').value = 'https://htetaung.me/about';
+        }
+
+        // --- Wallpaper Logic ---
+        function changeWallpaper(el, url) {
+            document.body.style.backgroundImage = `url('${url}')`;
+            document.querySelectorAll('.wallpaper-option').forEach(opt => opt.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        // --- Context Menu ---
+        const contextMenu = document.getElementById('context-menu');
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            contextMenu.style.display = 'block';
+            contextMenu.style.left = e.pageX + 'px';
+            contextMenu.style.top = e.pageY + 'px';
+        });
+        document.addEventListener('click', () => contextMenu.style.display = 'none');
+
+        // --- Calculator Logic ---
+        function calcInput(val) {
+            const display = document.getElementById('calc-display');
+            if(val === 'C') display.value = '0';
+            else if(val === '=') {
+                try { display.value = eval(display.value); } catch { display.value = 'Error'; }
+            } else {
+                if(display.value === '0') display.value = val;
+                else display.value += val;
+            }
+        }
+        
+        // Open Files on start
+        setTimeout(() => openWindow('win-files'), 500);
+
     </script>
 </body>
 </html>
