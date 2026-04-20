@@ -7,7 +7,7 @@ import tsconfigPaths from "vite-tsconfig-paths";
 // Set base to "/<your-repo-name>/" (with leading & trailing slash).
 // Example: if repo is github.com/Htet-2aung/portfolio -> base: "/portfolio/"
 // For a user/org site (username.github.io) or custom domain, use "/".
-const base = process.env.VITE_BASE ?? "/YOUR-REPO-NAME/";
+const base = process.env.VITE_BASE ?? "/Htet-2aung.github.io/";
 
 export default defineConfig({
   base,
